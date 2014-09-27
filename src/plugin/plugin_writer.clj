@@ -22,9 +22,7 @@
                                 "popup.js"],
 
     "permissions" [
-                   "tabs"
-                   "*://*/*"
-                   "contextMenus"
+                   "history"
                    ]}))
 
 
