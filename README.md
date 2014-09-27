@@ -16,7 +16,7 @@ To start a web server for the application, run:
 
 ## Clojurescript
 
-To compile .cljs files to javascript, run:
+To compile .cljs files to Javascript, run:
 
     lein cljsbuild auto
 
@@ -29,3 +29,10 @@ To compile .css files, run:
     lein garden auto
 
 See: [https://github.com/noprompt/lein-garden](https://github.com/noprompt/lein-garden)
+
+## Plugin
+
+The code to write the plugin is in /plugin/plugin_writer.clj.
+I've been building it in the REPL with the line:
+
+    (write-plugin)

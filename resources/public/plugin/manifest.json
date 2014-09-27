@@ -1,0 +1,1 @@
+{"name":"Wikihole","version":"0.0","manifest_version":2,"description":"Chart your journey down the Wikihole!","browser_action":{"popup":"index.html"}}
