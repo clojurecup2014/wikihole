@@ -26668,10 +26668,10 @@ cljs.core.special_symbol_QMARK_ = function special_symbol_QMARK_(x) {
   "letfn*", "letfn*", -110097810, null), null, new cljs.core.Symbol(null, "if", "if", 1181717262, null), null, new cljs.core.Symbol(null, "new", "new", -444906321, null), null, new cljs.core.Symbol(null, "ns", "ns", 2082130287, null), null, new cljs.core.Symbol(null, "deftype*", "deftype*", 962659890, null), null, new cljs.core.Symbol(null, "let*", "let*", 1920721458, null), null, new cljs.core.Symbol(null, "js*", "js*", -1134233646, null), null, new cljs.core.Symbol(null, "fn*", "fn*", -752876845, 
   null), null, new cljs.core.Symbol(null, "recur", "recur", 1202958259, null), null, new cljs.core.Symbol(null, "set!", "set!", 250714521, null), null, new cljs.core.Symbol(null, ".", ".", 1975675962, null), null, new cljs.core.Symbol(null, "quote", "quote", 1377916282, null), null, new cljs.core.Symbol(null, "throw", "throw", 595905694, null), null, new cljs.core.Symbol(null, "def", "def", 597100991, null), null], null), null), x);
 };
-goog.provide("wikihole.plugin_js");
+goog.provide("wikihole.pluginjs");
 goog.require("cljs.core");
 cljs.core.enable_console_print_BANG_.call(null);
-wikihole.plugin_js.init = function init() {
+wikihole.pluginjs.init = function init() {
   return cljs.core.println.call(null, "Hello, world! We have mastered Clojurescript :D");
 };
-window.onload = wikihole.plugin_js.init;
+window.onload = wikihole.pluginjs.init;

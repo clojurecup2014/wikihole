@@ -1,4 +1,4 @@
-(ns wikihole.custom-css
+(ns wikihole.customcss
   (:require [garden.core :refer [css]]
             [garden.def :refer [defstylesheet defstyles]]
             [garden.units :refer [px]]))

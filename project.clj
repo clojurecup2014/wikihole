@@ -13,15 +13,24 @@
             [lein-garden "0.2.1"]]
   :ring {:handler wikihole.handler/app}
   :cljsbuild {:builds [{ ;; For the plugin
-                        :source-paths ["src/plugin"]
+                        :source-paths ["src/wikihole"]
                         :compiler {:output-to "resources/public/plugin/popup.js"}}]}
-  :garden {:builds [{;; Source paths where the stylesheet source code is
+  :garden {:builds [{;; For the website
                      :source-paths ["src"]
                      ;; The var containing your stylesheet:
-                     :stylesheet wikihole.custom-css/screen
+                     :stylesheet wikihole.customcss/screen
                      ;; Compiler flags passed to `garden.core/css`:
                      :compiler {;; Where to save the file:
                                 :output-to "resources/public/stylesheets/main.css"
+                                ;; Compress the output?
+                                :pretty-print? false}}
+                    {;; For the plugin
+                     :source-paths ["src"]
+                     ;; The var containing your stylesheet:
+                     :stylesheet wikihole.pluginwriter/screen
+                     ;; Compiler flags passed to `garden.core/css`:
+                     :compiler {;; Where to save the file:
+                                :output-to "resources/public/plugin/main.css"
                                 ;; Compress the output?
                                 :pretty-print? false}}]}
   :profiles

@@ -1,4 +1,4 @@
-(ns wikihole.plugin-js)
+(ns wikihole.pluginjs)
 
 (enable-console-print!)
 

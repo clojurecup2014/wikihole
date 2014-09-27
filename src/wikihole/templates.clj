@@ -1,5 +1,5 @@
 (ns wikihole.templates
-  (:require [wikihole.custom-css :as custom-css])
+  (:require [wikihole.customcss :as customcss])
   (:use [hiccup.core]
         [hiccup.page]
         [hiccup.form]))
@@ -10,7 +10,7 @@
   "Builds <head>"
   [title]
   [:head [:title title]
-   (custom-css/google-font-tag)
+   (customcss/google-font-tag)
    (include-css "/stylesheets/normalize.css" "/stylesheets/foundation.min.css" "/stylesheets/main.css")
    (include-js "/javascripts/main.js")])
 

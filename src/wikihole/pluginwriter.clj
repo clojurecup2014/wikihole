@@ -1,10 +1,30 @@
-(ns wikihole.plugin-writer
+(ns wikihole.pluginwriter
   (:require [clojure.data.json :as json]
             [garden.core :refer [css]]
             [garden.def :refer [defstylesheet defstyles]]
             [garden.units :refer [px]])
   (:use [hiccup.core]
         [hiccup.page]))
+
+(def plugin-style
+  (css [:body {:font-family "Helvetica"
+               :color "purple"}]))
+
+(def body-font "Arial")
+(def header-font "Courier")
+(def body-font-size "18px")
+
+(def colors {:body-background "white"
+             :body-font "#222"})
+
+(defstyles screen ;;; lein garden auto compiles this
+  [:body {:color (get colors :body-font)
+          :background-color (get colors :body-background)}]
+  [:body :p :li :label :.button :input
+   {:font-family body-font
+    :font-size body-font-size}]
+  [:h1 :h2 :h3 :h4 :h5 :h6
+   {:font-family header-font}])
 
 (defn manifest-str
   []
@@ -25,16 +45,18 @@
                    "history"
                    ]}))
 
-
 (defn html-str
   []
   (html5
    (html
     [:head
      [:title "Down the Wikihole!"]
-     (include-js "popup.js")]
+     (include-js "popup.js")
+     (include-css "main.css")]
     [:body
      [:h1 "Hello, world! This is the Wikihole Chrome extension. v. 0.0."]])))
+
+(html-str)
 
 (defn write-plugin
   []
