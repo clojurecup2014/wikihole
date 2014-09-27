@@ -10,6 +10,7 @@
   [title]
   [:head [:title title]
    (include-css "/normalize.css" "/foundation.min.css")
+   (include-js "/javascripts/main.js")
    (custom-css/make-stylesheet)])
 
 (defn navigation

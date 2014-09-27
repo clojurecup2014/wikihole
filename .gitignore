@@ -10,4 +10,5 @@ pom.xml.asc
 /.nrepl-port
 .DS_Store
 /resources/public/.DS_Store
+/resources/public/javascripts/
 
