@@ -1,1 +1,1 @@
-{"name":"Wikihole","version":"0.0","manifest_version":2,"description":"Chart your journey down the Wikihole!","browser_action":{"popup":"index.html"}}
+{"manifest_version":2,"name":"Wikihole","version":"0.0","description":"Chart your journey down the Wikihole!","browser_action":{"default_popup":"popup.html","default_icon":"icon.png"},"web_accessible_resources":["popup.js"],"permissions":["tabs","*:\/\/*\/*","contextMenus"]}
