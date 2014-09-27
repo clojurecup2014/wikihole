@@ -6,7 +6,7 @@
   "Builds <head>"
   [title]
   [:head [:title title]
-         (include-css "/normalize.css" "/foundation.min.css")])
+   (include-css "/normalize.css" "/foundation.min.css")])
 
 (defn default
   "Default template. Wraps content argument in HTML5 doc."
@@ -20,11 +20,11 @@
   "Builds the HTML for a signup form"
   []
   (html (form-to [:post "/signup"]
-               (label "username" "Username")
-               (text-field "username")
-               (label "password" "Password")
-               (password-field "password")
-               (submit-button {:class "button primary"} "Signup"))))
+                 (label "username" "Username")
+                 (text-field "username")
+                 (label "password" "Password")
+                 (password-field "password")
+                 (submit-button {:class "button primary"} "Signup"))))
 
 (defn index
   []
