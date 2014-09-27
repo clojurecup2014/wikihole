@@ -1,7 +1,8 @@
 (ns wikihole.templates
-  (:require [wikihole.custom-css :as custom-css]))
-
-(use 'hiccup.core 'hiccup.page 'hiccup.form)
+  (:require [wikihole.custom-css :as custom-css])
+  (:use [hiccup.core]
+        [hiccup.page]
+        [hiccup.form]))
 
 ;;;;;;;;; Hiccup documentation: https://github.com/weavejester/hiccup
 
@@ -14,7 +15,7 @@
    (include-js "/javascripts/main.js")])
 
 (defn navigation
-  "Builds the navigation menu used site-wite"
+  "Builds the navigation menu used site-wide"
   []
   (html [:nav.top-bar
          [:ul.title-area
@@ -28,39 +29,67 @@
            [:li ;; TODO make conditional
             [:a {:href "/signup"} "Signup"]]]]]))
 
+(defn masthead
+  ([title]
+   (html [:div#masthead
+          [:h1.small-text-center title]]))
+  ([title content]
+   (html [:div#masthead
+          [:h1.small-text-center title]
+          content])))
+
+
 (defn default
   "Default template. Wraps content argument in HTML5 doc."
-  [content]
-  (html
-   (html5
-    (head "Down the Wikihole!")
-    [:body
-     (navigation)
-     content])))
+  ([title content]
+   (html
+    (html5
+     (head title)
+     [:body
+      (navigation)
+      (masthead title)
+      [:div.row
+       [:div.small-12.columns content]]])))
+  ([title masthead content]
+   (html
+    (html5
+     (head title)
+     [:body
+      (navigation)
+      masthead
+      [:div.row
+       [:div.small-12.columns content]]]))))
 
 (defn signup-form
   "Builds the HTML for a signup form"
   []
-  (html (form-to [:post "/signup"]
-                 (label "username" "Username")
-                 (text-field "username")
-                 (label "password" "Password")
-                 (password-field "password")
-                 (submit-button {:class "button primary"} "Signup"))))
+  (html [:div.small-text-center.small-12.medium-6.columns.medium-centered
+         (form-to [:post "/signup"]
+                  (label "username" "Username")
+                  (text-field "username")
+                  (label "password" "Password")
+                  (password-field "password")
+                  (submit-button {:class "button primary"} "Signup"))]))
 
 (defn index
   []
-  (default (html [:h1 "Welcome to the Wikihole!"]
-                 [:p (str "Enjoy your ride."
-                          " We'll chart your adventures.")])))
+  (let [title "Welcome to the Wikihole!"]
+    (default title
+      (masthead title
+                (html [:div.row
+                       [:div.small-12.columns.small-text-center
+                        [:a.button.large {:href "/signup"} "Sign Up"]]]))
+      (html
+       [:p.small-text-center
+        [:h3.small-text-center "Enjoy the ride. We'll chart your adventures."]]))))
 
 (defn signup
   []
-  (default (signup-form)))
+  (default "Sign up" (signup-form)))
 
 (defn signup-complete
   [username]
-  (default (str "Thanks for signing up, " username "!")))
+  (default "Signup Complete" (str "Thanks for signing up, " username "!")))
 
 (defn user-index
   [id]
