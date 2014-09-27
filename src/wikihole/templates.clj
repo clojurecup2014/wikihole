@@ -1,4 +1,5 @@
-(ns wikihole.templates)
+(ns wikihole.templates
+  (:require [wikihole.custom-css :as custom-css]))
 
 (use 'hiccup.core 'hiccup.page 'hiccup.form)
 
@@ -6,7 +7,8 @@
   "Builds <head>"
   [title]
   [:head [:title title]
-   (include-css "/normalize.css" "/foundation.min.css")])
+   (include-css "/normalize.css" "/foundation.min.css")
+   (custom-css/make-stylesheet)])
 
 (defn default
   "Default template. Wraps content argument in HTML5 doc."
