@@ -1,6 +1,9 @@
 (ns wikihole.custom-css
   (:require [garden.core :refer [css]]))
 
+;;;;;;; Garden documentation: https://github.com/noprompt/garden
+;;;;;;; Foundation documentation: http://foundation.zurb.com/docs/
+
 (def body-font "Roboto")
 (def body-font-weight "300")
 (def bold-font-weight "500")

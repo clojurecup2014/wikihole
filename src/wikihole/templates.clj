@@ -3,6 +3,8 @@
 
 (use 'hiccup.core 'hiccup.page 'hiccup.form)
 
+;;;;;;;;; Hiccup documentation: https://github.com/weavejester/hiccup
+
 (defn head
   "Builds <head>"
   [title]

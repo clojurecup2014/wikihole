@@ -4,6 +4,8 @@
         [hiccup.core])
   (:require [c2.scale :as scale]))
 
+;;;;;;;;;; C2 documentation: https://github.com/lynaghk/c2
+
 (defn css-str
   "Turns a map of attributes+values, i.e. {:height 20 :width 30}, into a CSS string for inline styling"
   ;; Meant for inline-styling/data-driven-styling only
