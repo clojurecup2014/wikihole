@@ -10,13 +10,30 @@
    (include-css "/normalize.css" "/foundation.min.css")
    (custom-css/make-stylesheet)])
 
+(defn navigation
+  "Builds the navigation menu used site-wite"
+  []
+  (html [:nav.top-bar
+         [:ul.title-area
+          [:li.name [:h1 [:a {:href "/"} "Down the Wikihole!"]]]]
+         [:section.top-bar-section
+          [:ul.right
+           [:li ;; TODO make page
+            [:a {:href "#"} "About"]]
+           [:li ;; TODO make page, make conditional
+            [:a {:href "#"} "Dashboard"]]
+           [:li ;; TODO make conditional
+            [:a {:href "/signup"} "Signup"]]]]]))
+
 (defn default
   "Default template. Wraps content argument in HTML5 doc."
   [content]
   (html
    (html5
     (head "Down the Wikihole!")
-    [:body content])))
+    [:body
+     (navigation)
+     content])))
 
 (defn signup-form
   "Builds the HTML for a signup form"

@@ -5,7 +5,8 @@
   (:require [c2.scale :as scale]))
 
 (defn css-str
-  "Turns a map of attributes+values, i.e. {:height 20 :width 30}, into a CSS-formatted string"
+  "Turns a map of attributes+values, i.e. {:height 20 :width 30}, into a CSS string for inline styling"
+  ;; Meant for inline-styling/data-driven-styling only
   [user-attrs]
   (let [attrs (merge {:num-format "px"} user-attrs)]
     (string/join ";"

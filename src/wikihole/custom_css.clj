@@ -4,7 +4,7 @@
 (def body-font "Roboto")
 (def body-font-weight "300")
 (def bold-font-weight "500")
-(def header-font "Fira Sans")
+(def header-font "Roboto Slab")
 (def header-font-weight "700")
 (def body-font-size "18px")
 
