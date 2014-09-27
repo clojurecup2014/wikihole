@@ -12,18 +12,9 @@
             [lein-cljsbuild "1.0.3"]
             [lein-garden "0.2.1"]]
   :ring {:handler wikihole.handler/app}
-  :cljsbuild {
-              :builds [{
-                        ;;; For the web app
-                        :source-paths ["src/web-js"]
-                        :compiler {
-                                   :output-to "resources/public/javascripts/main.js"  ; default: target/cljsbuild-main.js
-                                   :optimizations :whitespace
-                                   :pretty-print true}}
-                       {
-                        ;; For the plugin
+  :cljsbuild {:builds [{ ;; For the plugin
                         :source-paths ["src/plugin"]
-                        :compiler {:output-to "resources/public/javascripts/plugin.js"}}]}
+                        :compiler {:output-to "resources/public/plugin/popup.js"}}]}
   :garden {:builds [{;; Source paths where the stylesheet source code is
                      :source-paths ["src"]
                      ;; The var containing your stylesheet:

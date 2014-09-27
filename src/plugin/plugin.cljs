@@ -1,4 +1,8 @@
-; In console, run: hello.greet("ClojureScript");
-(ns hello)
-(defn ^:export greet [n]
-  (str "Hi there, " n))
+(ns wikihole.plugin-js)
+
+(enable-console-print!)
+
+(defn init []
+  (println "Hello, world! We have mastered Clojurescript :D"))
+
+(set! (.-onload js/window) init)
