@@ -11,4 +11,5 @@ pom.xml.asc
 .DS_Store
 /resources/public/.DS_Store
 /resources/public/javascripts/
-
+.idea*
+*.iml
