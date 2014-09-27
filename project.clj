@@ -34,4 +34,7 @@
                                 :pretty-print? false}}]}
   :profiles
   {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]
-                        [ring-mock "0.1.5"]]}})
+                        [ring-mock "0.1.5"]]}}
+  ;;;;; Uncomment below if we want to automatically compile CSS + JS we run lein tasks
+  ;;;;; :hooks [leiningen.garden leiningen.cljsbuild]
+  )

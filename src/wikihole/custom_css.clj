@@ -30,7 +30,6 @@
        "' rel='stylesheet' type='text/css'>"))
 
 (defstyles screen
-  (google-font)
   [:body {:color (get colors :body-font)
           :background-color (get colors :body-background)}]
   [:body :p :li :label :.button :input
