@@ -8,7 +8,8 @@
                  [com.keminglabs/c2 "0.2.3"]
                  [org.clojure/clojurescript "0.0-2356"]]
   :plugins [[lein-ring "0.8.11"]
-            [lein-cljsbuild "1.0.3"]]
+            [lein-cljsbuild "1.0.3"]
+            [lein-garden "0.2.1"]]
   :ring {:handler wikihole.handler/app}
   :cljsbuild {
               :builds [{
@@ -22,6 +23,15 @@
                         ;; For the plugin
                         :source-paths ["src/plugin"]
                         :compiler {:output-to "resources/public/javascripts/plugin.js"}}]}
+  :garden {:builds [{;; Source paths where the stylesheet source code is
+                     :source-paths ["src"]
+                     ;; The var containing your stylesheet:
+                     :stylesheet wikihole.custom-css/screen
+                     ;; Compiler flags passed to `garden.core/css`:
+                     :compiler {;; Where to save the file:
+                                :output-to "resources/public/stylesheets/main.css"
+                                ;; Compress the output?
+                                :pretty-print? false}}]}
   :profiles
   {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]
                         [ring-mock "0.1.5"]]}})

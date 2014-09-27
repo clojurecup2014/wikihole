@@ -1,5 +1,7 @@
 (ns wikihole.custom-css
-  (:require [garden.core :refer [css]]))
+  (:require [garden.core :refer [css]]
+            [garden.def :refer [defstylesheet defstyles]]
+            [garden.units :refer [px]]))
 
 ;;;;;;; Garden documentation: https://github.com/noprompt/garden
 ;;;;;;; Foundation documentation: http://foundation.zurb.com/docs/
@@ -14,31 +16,29 @@
 (def colors {:body-background "white"
              :body-font "#222"})
 
-(defn google-font
-  "Makes the import-Google-fonts String for a header and body font"
+(defn google-font-tag
+  "Makes the link tag that imports Google fonts"
   []
-  (str "@import url(http://fonts.googleapis.com/css?family="
-       ;;;;;;;; header font ;;;;;;;
+  (str ;;;;;;;; header font ;;;;;;;
+       "<link href='http://fonts.googleapis.com/css?family="
        (clojure.string/replace header-font " " "+") ":" header-font-weight
        "|"
        ;;;;;;;; body font ;;;;;;;;;
        (clojure.string/replace body-font " " "+") ":"
        (clojure.string/join "," [body-font-weight body-font-weight "italic"
-                                 bold-font-weight bold-font-weight "italic"]) ");"))
+                                 bold-font-weight bold-font-weight "italic"])
+       "' rel='stylesheet' type='text/css'>"))
 
-(defn make-stylesheet
-  "Site-wide custom styles"
-  []
-  (str "<style type=\"text/css\">"
-       (google-font)
-       (css [:body {:color (get colors :body-font)
-                    :background-color (get colors :body-background)}]
-            [:body :p :li :label :.button :input
-                 {:font-family body-font
-                  :font-weight body-font-weight
-                  :font-size body-font-size}]
-            [:strong {:font-weight bold-font-weight}]
-            [:h1 :h2 :h3 :h4 :h5 :h6
-                 {:font-family header-font
-                  :font-weight header-font-weight}])
-       "</style>"))
+(defstyles screen
+  (google-font)
+  [:body {:color (get colors :body-font)
+          :background-color (get colors :body-background)}]
+  [:body :p :li :label :.button :input
+   {:font-family body-font
+    :font-weight body-font-weight
+    :font-size body-font-size}]
+  [:strong {:font-weight bold-font-weight}]
+  [:h1 :h2 :h3 :h4 :h5 :h6
+   {:font-family header-font
+    :font-weight header-font-weight}])
+

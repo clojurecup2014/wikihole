@@ -9,9 +9,9 @@
   "Builds <head>"
   [title]
   [:head [:title title]
-   (include-css "/normalize.css" "/foundation.min.css")
-   (include-js "/javascripts/main.js")
-   (custom-css/make-stylesheet)])
+   (custom-css/google-font-tag)
+   (include-css "/stylesheets/normalize.css" "/stylesheets/foundation.min.css" "/stylesheets/main.css")
+   (include-js "/javascripts/main.js")])
 
 (defn navigation
   "Builds the navigation menu used site-wite"
