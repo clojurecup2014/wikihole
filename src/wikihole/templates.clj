@@ -129,4 +129,4 @@
   [id]
   (default
     "Your Trip Down the Wikihole"
-    (graphics/trip-graphs test-trip-json-string)))
+    (graphics/trip-graphs id test-trip-json-string)))
