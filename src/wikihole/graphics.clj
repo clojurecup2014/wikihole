@@ -75,3 +75,13 @@
              [:h1 (parse-title-from-url (get visit :url))]
              [:p (pretty-date (get visit :time_visited))]]
             )]))])))
+
+(defn trip-graphs
+  [trip-json-string]
+  (let [trip (get (json/read-str trip-json-string) "visits")]
+  (reduce
+   str
+   (for [visit trip]
+     (html
+      [:h2 (parse-title-from-url (get visit "url"))]
+      [:p (pretty-date (get visit "time_visited"))])))))
