@@ -6,13 +6,7 @@
         [hiccup.page]
         [hiccup.form]))
 
-
-;;;;;;;;;;;;;;;;;;;;
-;;;;; TODO !!!!!
-;;;;;;;;;;;;;;;;;;;;
-
-(def download-link "#")
-(def about-link "#")
+(def download-link "/plugin/plugin.zip")
 
 ;;;;;;;;; Hiccup documentation: https://github.com/weavejester/hiccup
 
@@ -32,8 +26,6 @@
           [:li.name [:h1 [:a {:href "/"} "Down the Wikihole!"]]]]
          [:section.top-bar-section
           [:ul.right
-           ;;[:li
-           ;; [:a {:href about-link} "About"]]
            [:li
             [:a {:href download-link} "Download Plugin"]]]]]))
 
