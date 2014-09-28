@@ -5,9 +5,9 @@
 (use 'korma.core)
 (use 'korma.db)
 
-(defdb prod (postgres {:db "" ;TODO
-                       :user ""
-                       :password ""
+(defdb prod (postgres {:db (System/getProperty "db-name") 
+                       :user (System/getProperty "db-user")
+                       :password (System/getProperty "db-password")
                        ;; optional keys
                        :host "localhost"
                        :port "5432"}))
