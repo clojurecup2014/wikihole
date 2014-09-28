@@ -26,3 +26,7 @@
     [user-id]
     (-> (r/response (q/get-user-trips user-id))
         (r/content-type "application/json")))
+
+(defn create-user
+    []
+    (r/created (str "this/will/be/url/for/" (q/add-user!) "/new/user"))) ;TODO)
