@@ -31,7 +31,7 @@
         (+ (.-innerHTML
             (.getElementById js/document "output"))
            (str "<li>" (clean-title (.-title itm)) "</li>")))
-        (.push visits (js-obj "time_visited" (.-lastVisitTime itm) "url" (.-url itm))))))
+        (.push visits (js-obj "time_visited" (.floor js/Math (/ (.-lastVisitTime itm) 1000)) "url" (.-url itm))))))
     (send-visits visits)))
 
 (defn send-visits [visits]
