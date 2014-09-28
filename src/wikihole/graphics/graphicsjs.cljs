@@ -51,14 +51,14 @@
        y-label "Time Spent on Page"
        xdata (remove-last (make-time-data))
        ydata (make-per-page-data)
-       paper (js/Raphael. "chart-container" 500 500)]
-      (. paper linechart
-         60 10 800 330 xdata ydata
-         (js-obj "gutter" 20 "nostroke" false
-                 "axis" "0 0 0 1" "axisystep" 10
-                 "symbol" "circle" "smooth" true
-                 "width" 1.2
-                 "colors" (array color1 color2 color3))))))
+       paper (js/Raphael. "chart-container" 500 500)
+       chart (. paper linechart
+                60 10 800 330 xdata ydata
+                (js-obj "gutter" 20 "nostroke" false
+                        "axis" "0 0 1 1" "axisystep" 10
+                        "symbol" "circle" "smooth" true
+                        "width" 1.2
+                        "colors" (array color1 color2 color3)))])))
 
 (defn init
   []

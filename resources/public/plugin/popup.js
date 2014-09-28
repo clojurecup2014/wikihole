@@ -27058,49 +27058,49 @@ wikihole.graphicsjs.time_with_per_page = function time_with_per_page(trip) {
 wikihole.graphicsjs.make_time_data = function make_time_data() {
   var data = JSON.parse(document.getElementById("secret-data").innerHTML).visits;
   var times = [];
-  var seq__12856_12860 = cljs.core.seq.call(null, data);
-  var chunk__12857_12861 = null;
-  var count__12858_12862 = 0;
-  var i__12859_12863 = 0;
+  var seq__13128_13132 = cljs.core.seq.call(null, data);
+  var chunk__13129_13133 = null;
+  var count__13130_13134 = 0;
+  var i__13131_13135 = 0;
   while (true) {
-    if (i__12859_12863 < count__12858_12862) {
-      var visit_12864 = cljs.core._nth.call(null, chunk__12857_12861, i__12859_12863);
-      times.push(visit_12864.time_visited);
-      var G__12865 = seq__12856_12860;
-      var G__12866 = chunk__12857_12861;
-      var G__12867 = count__12858_12862;
-      var G__12868 = i__12859_12863 + 1;
-      seq__12856_12860 = G__12865;
-      chunk__12857_12861 = G__12866;
-      count__12858_12862 = G__12867;
-      i__12859_12863 = G__12868;
+    if (i__13131_13135 < count__13130_13134) {
+      var visit_13136 = cljs.core._nth.call(null, chunk__13129_13133, i__13131_13135);
+      times.push(visit_13136.time_visited);
+      var G__13137 = seq__13128_13132;
+      var G__13138 = chunk__13129_13133;
+      var G__13139 = count__13130_13134;
+      var G__13140 = i__13131_13135 + 1;
+      seq__13128_13132 = G__13137;
+      chunk__13129_13133 = G__13138;
+      count__13130_13134 = G__13139;
+      i__13131_13135 = G__13140;
       continue;
     } else {
-      var temp__4126__auto___12869 = cljs.core.seq.call(null, seq__12856_12860);
-      if (temp__4126__auto___12869) {
-        var seq__12856_12870__$1 = temp__4126__auto___12869;
-        if (cljs.core.chunked_seq_QMARK_.call(null, seq__12856_12870__$1)) {
-          var c__4408__auto___12871 = cljs.core.chunk_first.call(null, seq__12856_12870__$1);
-          var G__12872 = cljs.core.chunk_rest.call(null, seq__12856_12870__$1);
-          var G__12873 = c__4408__auto___12871;
-          var G__12874 = cljs.core.count.call(null, c__4408__auto___12871);
-          var G__12875 = 0;
-          seq__12856_12860 = G__12872;
-          chunk__12857_12861 = G__12873;
-          count__12858_12862 = G__12874;
-          i__12859_12863 = G__12875;
+      var temp__4126__auto___13141 = cljs.core.seq.call(null, seq__13128_13132);
+      if (temp__4126__auto___13141) {
+        var seq__13128_13142__$1 = temp__4126__auto___13141;
+        if (cljs.core.chunked_seq_QMARK_.call(null, seq__13128_13142__$1)) {
+          var c__4408__auto___13143 = cljs.core.chunk_first.call(null, seq__13128_13142__$1);
+          var G__13144 = cljs.core.chunk_rest.call(null, seq__13128_13142__$1);
+          var G__13145 = c__4408__auto___13143;
+          var G__13146 = cljs.core.count.call(null, c__4408__auto___13143);
+          var G__13147 = 0;
+          seq__13128_13132 = G__13144;
+          chunk__13129_13133 = G__13145;
+          count__13130_13134 = G__13146;
+          i__13131_13135 = G__13147;
           continue;
         } else {
-          var visit_12876 = cljs.core.first.call(null, seq__12856_12870__$1);
-          times.push(visit_12876.time_visited);
-          var G__12877 = cljs.core.next.call(null, seq__12856_12870__$1);
-          var G__12878 = null;
-          var G__12879 = 0;
-          var G__12880 = 0;
-          seq__12856_12860 = G__12877;
-          chunk__12857_12861 = G__12878;
-          count__12858_12862 = G__12879;
-          i__12859_12863 = G__12880;
+          var visit_13148 = cljs.core.first.call(null, seq__13128_13142__$1);
+          times.push(visit_13148.time_visited);
+          var G__13149 = cljs.core.next.call(null, seq__13128_13142__$1);
+          var G__13150 = null;
+          var G__13151 = 0;
+          var G__13152 = 0;
+          seq__13128_13132 = G__13149;
+          chunk__13129_13133 = G__13150;
+          count__13130_13134 = G__13151;
+          i__13131_13135 = G__13152;
           continue;
         }
       } else {
@@ -27118,51 +27118,51 @@ wikihole.graphicsjs.make_per_page_data = function make_per_page_data() {
   var data = JSON.parse(document.getElementById("secret-data").innerHTML).visits;
   var times = wikihole.graphicsjs.make_time_data.call(null);
   var times_on_page = [];
-  var seq__12885_12889 = cljs.core.seq.call(null, data);
-  var chunk__12886_12890 = null;
-  var count__12887_12891 = 0;
-  var i__12888_12892 = 0;
+  var seq__13157_13161 = cljs.core.seq.call(null, data);
+  var chunk__13158_13162 = null;
+  var count__13159_13163 = 0;
+  var i__13160_13164 = 0;
   while (true) {
-    if (i__12888_12892 < count__12887_12891) {
-      var visit_12893 = cljs.core._nth.call(null, chunk__12886_12890, i__12888_12892);
-      var idx_12894 = times.indexOf(visit_12893.time_visited);
-      times_on_page.push(cljs.core.nth.call(null, times, idx_12894 + 1, visit_12893.time_visited) - visit_12893.time_visited);
-      var G__12895 = seq__12885_12889;
-      var G__12896 = chunk__12886_12890;
-      var G__12897 = count__12887_12891;
-      var G__12898 = i__12888_12892 + 1;
-      seq__12885_12889 = G__12895;
-      chunk__12886_12890 = G__12896;
-      count__12887_12891 = G__12897;
-      i__12888_12892 = G__12898;
+    if (i__13160_13164 < count__13159_13163) {
+      var visit_13165 = cljs.core._nth.call(null, chunk__13158_13162, i__13160_13164);
+      var idx_13166 = times.indexOf(visit_13165.time_visited);
+      times_on_page.push(cljs.core.nth.call(null, times, idx_13166 + 1, visit_13165.time_visited) - visit_13165.time_visited);
+      var G__13167 = seq__13157_13161;
+      var G__13168 = chunk__13158_13162;
+      var G__13169 = count__13159_13163;
+      var G__13170 = i__13160_13164 + 1;
+      seq__13157_13161 = G__13167;
+      chunk__13158_13162 = G__13168;
+      count__13159_13163 = G__13169;
+      i__13160_13164 = G__13170;
       continue;
     } else {
-      var temp__4126__auto___12899 = cljs.core.seq.call(null, seq__12885_12889);
-      if (temp__4126__auto___12899) {
-        var seq__12885_12900__$1 = temp__4126__auto___12899;
-        if (cljs.core.chunked_seq_QMARK_.call(null, seq__12885_12900__$1)) {
-          var c__4408__auto___12901 = cljs.core.chunk_first.call(null, seq__12885_12900__$1);
-          var G__12902 = cljs.core.chunk_rest.call(null, seq__12885_12900__$1);
-          var G__12903 = c__4408__auto___12901;
-          var G__12904 = cljs.core.count.call(null, c__4408__auto___12901);
-          var G__12905 = 0;
-          seq__12885_12889 = G__12902;
-          chunk__12886_12890 = G__12903;
-          count__12887_12891 = G__12904;
-          i__12888_12892 = G__12905;
+      var temp__4126__auto___13171 = cljs.core.seq.call(null, seq__13157_13161);
+      if (temp__4126__auto___13171) {
+        var seq__13157_13172__$1 = temp__4126__auto___13171;
+        if (cljs.core.chunked_seq_QMARK_.call(null, seq__13157_13172__$1)) {
+          var c__4408__auto___13173 = cljs.core.chunk_first.call(null, seq__13157_13172__$1);
+          var G__13174 = cljs.core.chunk_rest.call(null, seq__13157_13172__$1);
+          var G__13175 = c__4408__auto___13173;
+          var G__13176 = cljs.core.count.call(null, c__4408__auto___13173);
+          var G__13177 = 0;
+          seq__13157_13161 = G__13174;
+          chunk__13158_13162 = G__13175;
+          count__13159_13163 = G__13176;
+          i__13160_13164 = G__13177;
           continue;
         } else {
-          var visit_12906 = cljs.core.first.call(null, seq__12885_12900__$1);
-          var idx_12907 = times.indexOf(visit_12906.time_visited);
-          times_on_page.push(cljs.core.nth.call(null, times, idx_12907 + 1, visit_12906.time_visited) - visit_12906.time_visited);
-          var G__12908 = cljs.core.next.call(null, seq__12885_12900__$1);
-          var G__12909 = null;
-          var G__12910 = 0;
-          var G__12911 = 0;
-          seq__12885_12889 = G__12908;
-          chunk__12886_12890 = G__12909;
-          count__12887_12891 = G__12910;
-          i__12888_12892 = G__12911;
+          var visit_13178 = cljs.core.first.call(null, seq__13157_13172__$1);
+          var idx_13179 = times.indexOf(visit_13178.time_visited);
+          times_on_page.push(cljs.core.nth.call(null, times, idx_13179 + 1, visit_13178.time_visited) - visit_13178.time_visited);
+          var G__13180 = cljs.core.next.call(null, seq__13157_13172__$1);
+          var G__13181 = null;
+          var G__13182 = 0;
+          var G__13183 = 0;
+          seq__13157_13161 = G__13180;
+          chunk__13158_13162 = G__13181;
+          count__13159_13163 = G__13182;
+          i__13160_13164 = G__13183;
           continue;
         }
       } else {
@@ -27178,18 +27178,19 @@ wikihole.graphicsjs.draw_times_per_page = function draw_times_per_page() {
     var color2 = "#b300bc";
     var color3 = "#00bc8d";
     var label_text_opts = function() {
-      var obj12917 = {"font-weight":"bold", "font-size":"13px"};
-      return obj12917;
+      var obj13189 = {"font-weight":"bold", "font-size":"13px"};
+      return obj13189;
     }();
     var x_label = "Time of Lookup";
     var y_label = "Time Spent on Page";
     var xdata = wikihole.graphicsjs.remove_last.call(null, wikihole.graphicsjs.make_time_data.call(null));
     var ydata = wikihole.graphicsjs.make_per_page_data.call(null);
     var paper = new Raphael("chart-container", 500, 500);
-    return paper.linechart(60, 10, 800, 330, xdata, ydata, function() {
-      var obj12919 = {"gutter":20, "nostroke":false, "axis":"0 0 0 1", "axisystep":10, "symbol":"circle", "smooth":true, "width":1.2, "colors":[color1, color2, color3]};
-      return obj12919;
+    var chart = paper.linechart(60, 10, 800, 330, xdata, ydata, function() {
+      var obj13191 = {"gutter":20, "nostroke":false, "axis":"0 0 1 1", "axisystep":10, "symbol":"circle", "smooth":true, "width":1.2, "colors":[color1, color2, color3]};
+      return obj13191;
     }());
+    return null;
   } else {
     return null;
   }
