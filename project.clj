@@ -17,7 +17,7 @@
             [lein-garden "0.2.1"]]
   :ring {:handler wikihole.handler/app}
   :cljsbuild {:builds [{ ;; For the plugin
-                        :source-paths ["src/wikihole"]
+                        :source-paths ["src/wikihole/plugin"]
                         :compiler {:output-to "resources/public/plugin/popup.js"}}
                        { ;; For the web app
                         :source-paths ["src/wikihole/graphics"]
