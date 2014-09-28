@@ -26671,58 +26671,67 @@ cljs.core.special_symbol_QMARK_ = function special_symbol_QMARK_(x) {
 goog.provide("wikihole.pluginjs");
 goog.require("cljs.core");
 cljs.core.enable_console_print_BANG_.call(null);
+wikihole.pluginjs.wiki_title = "Wikipedia, the free encyclopedia";
 wikihole.pluginjs.days_ago = function days_ago(days) {
   return(new Date).getTime() - 1E3 * 60 * 60 * 24 * days;
 };
 wikihole.pluginjs.search_object = function search_object(days) {
-  console.log("Days ago: " + cljs.core.str.cljs$core$IFn$_invoke$arity$1(days));
-  var obj6587 = {"text":"Wikipedia, the free encyclopedia", "startTime":wikihole.pluginjs.days_ago.call(null, days)};
-  return obj6587;
+  var obj8256 = {"text":" - " + cljs.core.str.cljs$core$IFn$_invoke$arity$1(wikihole.pluginjs.wiki_title), "startTime":wikihole.pluginjs.days_ago.call(null, days)};
+  return obj8256;
+};
+wikihole.pluginjs.clean_title = function clean_title(unclean_title) {
+  return unclean_title.replace(" - " + cljs.core.str.cljs$core$IFn$_invoke$arity$1(wikihole.pluginjs.wiki_title), "");
 };
 wikihole.pluginjs.process_history = function process_history(hist) {
-  var seq__6592 = cljs.core.seq.call(null, hist);
-  var chunk__6593 = null;
-  var count__6594 = 0;
-  var i__6595 = 0;
+  var seq__8261 = cljs.core.seq.call(null, hist);
+  var chunk__8262 = null;
+  var count__8263 = 0;
+  var i__8264 = 0;
   while (true) {
-    if (i__6595 < count__6594) {
-      var itm = cljs.core._nth.call(null, chunk__6593, i__6595);
-      document.getElementById("output").innerHTML = document.getElementById("output").innerHTML + ("\x3cli\x3e" + cljs.core.str.cljs$core$IFn$_invoke$arity$1(itm.title) + "\x3c/li\x3e");
-      var G__6596 = seq__6592;
-      var G__6597 = chunk__6593;
-      var G__6598 = count__6594;
-      var G__6599 = i__6595 + 1;
-      seq__6592 = G__6596;
-      chunk__6593 = G__6597;
-      count__6594 = G__6598;
-      i__6595 = G__6599;
+    if (i__8264 < count__8263) {
+      var itm = cljs.core._nth.call(null, chunk__8262, i__8264);
+      if (!cljs.core._EQ_.call(null, itm.title, wikihole.pluginjs.wiki_title)) {
+        document.getElementById("output").innerHTML = document.getElementById("output").innerHTML + ("\x3cli\x3e" + cljs.core.str.cljs$core$IFn$_invoke$arity$1(wikihole.pluginjs.clean_title.call(null, itm.title)) + "\x3c/li\x3e");
+      } else {
+      }
+      var G__8265 = seq__8261;
+      var G__8266 = chunk__8262;
+      var G__8267 = count__8263;
+      var G__8268 = i__8264 + 1;
+      seq__8261 = G__8265;
+      chunk__8262 = G__8266;
+      count__8263 = G__8267;
+      i__8264 = G__8268;
       continue;
     } else {
-      var temp__4126__auto__ = cljs.core.seq.call(null, seq__6592);
+      var temp__4126__auto__ = cljs.core.seq.call(null, seq__8261);
       if (temp__4126__auto__) {
-        var seq__6592__$1 = temp__4126__auto__;
-        if (cljs.core.chunked_seq_QMARK_.call(null, seq__6592__$1)) {
-          var c__4408__auto__ = cljs.core.chunk_first.call(null, seq__6592__$1);
-          var G__6600 = cljs.core.chunk_rest.call(null, seq__6592__$1);
-          var G__6601 = c__4408__auto__;
-          var G__6602 = cljs.core.count.call(null, c__4408__auto__);
-          var G__6603 = 0;
-          seq__6592 = G__6600;
-          chunk__6593 = G__6601;
-          count__6594 = G__6602;
-          i__6595 = G__6603;
+        var seq__8261__$1 = temp__4126__auto__;
+        if (cljs.core.chunked_seq_QMARK_.call(null, seq__8261__$1)) {
+          var c__4408__auto__ = cljs.core.chunk_first.call(null, seq__8261__$1);
+          var G__8269 = cljs.core.chunk_rest.call(null, seq__8261__$1);
+          var G__8270 = c__4408__auto__;
+          var G__8271 = cljs.core.count.call(null, c__4408__auto__);
+          var G__8272 = 0;
+          seq__8261 = G__8269;
+          chunk__8262 = G__8270;
+          count__8263 = G__8271;
+          i__8264 = G__8272;
           continue;
         } else {
-          var itm = cljs.core.first.call(null, seq__6592__$1);
-          document.getElementById("output").innerHTML = document.getElementById("output").innerHTML + ("\x3cli\x3e" + cljs.core.str.cljs$core$IFn$_invoke$arity$1(itm.title) + "\x3c/li\x3e");
-          var G__6604 = cljs.core.next.call(null, seq__6592__$1);
-          var G__6605 = null;
-          var G__6606 = 0;
-          var G__6607 = 0;
-          seq__6592 = G__6604;
-          chunk__6593 = G__6605;
-          count__6594 = G__6606;
-          i__6595 = G__6607;
+          var itm = cljs.core.first.call(null, seq__8261__$1);
+          if (!cljs.core._EQ_.call(null, itm.title, wikihole.pluginjs.wiki_title)) {
+            document.getElementById("output").innerHTML = document.getElementById("output").innerHTML + ("\x3cli\x3e" + cljs.core.str.cljs$core$IFn$_invoke$arity$1(wikihole.pluginjs.clean_title.call(null, itm.title)) + "\x3c/li\x3e");
+          } else {
+          }
+          var G__8273 = cljs.core.next.call(null, seq__8261__$1);
+          var G__8274 = null;
+          var G__8275 = 0;
+          var G__8276 = 0;
+          seq__8261 = G__8273;
+          chunk__8262 = G__8274;
+          count__8263 = G__8275;
+          i__8264 = G__8276;
           continue;
         }
       } else {

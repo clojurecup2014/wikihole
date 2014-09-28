@@ -2,23 +2,31 @@
 
 (enable-console-print!)
 
+(def wiki-title "Wikipedia, the free encyclopedia")
+
 (defn days-ago
   [days]
   (- (.getTime (js/Date.)) (* 1000 60 60 24 days)))
 
 (defn search-object
   [days]
-  (.log js/console (str "Days ago: " days))
-  (js-obj "text" "Wikipedia, the free encyclopedia" "startTime" (days-ago days)))
+  (js-obj "text" (str " - " wiki-title) "startTime" (days-ago days)))
+
+(defn clean-title
+  [unclean-title]
+  (.replace unclean-title (str " - " wiki-title) ""))
 
 (defn process-history [hist]
-  (doseq [itm hist]
-    (set!
-     (.-innerHTML
-      (.getElementById js/document "output"))
-     (+ (.-innerHTML
-         (.getElementById js/document "output"))
-        (str "<li>" (.-title itm) "</li>"))))) ;; :url :title :lastVisitTime
+  (doseq
+    [itm hist]
+    (if
+      (not (= (.-title itm) wiki-title))
+      (set!
+       (.-innerHTML
+        (.getElementById js/document "output"))
+       (+ (.-innerHTML
+           (.getElementById js/document "output"))
+          (str "<li>" (clean-title (.-title itm)) "</li>")))))) ;; :url :title :lastVisitTime
 
 (defn collect-data
   []
@@ -28,8 +36,6 @@
              (number? days-ago)
              (> days-ago 0))
       (.search (.-history js/chrome) (search-object days-ago) process-history))))
-
-
 
 (defn init []
   (if (and (and js/document
