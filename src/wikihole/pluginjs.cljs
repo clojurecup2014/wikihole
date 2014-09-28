@@ -35,12 +35,12 @@
     (send-visits visits)))
 
 (defn send-visits [visits]
-  ;;(doseq [vs visits]
-  ;;  (println (.-url vs)))
+ ; (doseq [vs visits]
+  ; (println visits)
   (let [http (js/XMLHttpRequest.)]
     (.open http "POST" "http://localhost:3000/user/1/trip" true)
     (.setRequestHeader http "Content-Type" "application/json")
-    (.send http visits)))
+    (.send http (.stringify js/JSON (js-obj "trip" visits)))))
 
 (defn collect-data
   []

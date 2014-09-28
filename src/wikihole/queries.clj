@@ -34,8 +34,7 @@
     [user-id new-trip]
     (let [inserted-trip (insert trips (values {:users_id user-id}))
           new-trip-id (:trip_id inserted-trip)
-          trip-values (map #(assoc % :trip_id new-trip-id) (:trip new-trip))]
-        (println (str "##trip body values: " (doall (map println trip-values))))
+          trip-values (map #(assoc % :trips_id new-trip-id) (:trip new-trip))]
         (insert visits (values trip-values))))
 
 (defn add-user! []
