@@ -34,7 +34,8 @@
     [user-id new-trip]
     (let [inserted-trip (insert trips (values {:users_id user-id}))
           new-trip-id (:trip_id inserted-trip)
-          trip-values (map #(assoc % :trips_id new-trip-id) (:trip new-trip))]
+          trip-values (map #(clojure.set/rename-keys (assoc % :trips_id new-trip-id) {:lastVisitTime :time_visited}) (:trip new-trip))]
+          (println trip-values)
         (insert visits (values trip-values))
         new-trip-id))
 
