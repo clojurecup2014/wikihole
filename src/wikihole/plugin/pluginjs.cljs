@@ -7,13 +7,15 @@
 
 (def wiki-title "Wikipedia, the free encyclopedia")
 
+(def user-id-storage 'wikihole-user-id')
+
 (defn days-ago
   [days]
   (- (.getTime (js/Date.)) (* 1000 60 60 24 days)))
 
 (defn search-object
   [days]
-  (js-obj "text" "" "startTime" (days-ago days)))
+  (js-obj "text" "" "startTime" (days-ago days) "maxResults" 0))
 
 (defn clean-title
   [unclean-title]
@@ -30,7 +32,7 @@
         hist-in-seconds (map #(update-in % [:lastVisitTime] time-to-millis) clojurized-hist)
         chunks (break-into-trips hist-in-seconds)
         trips (filter #(> (count %) 2) chunks)]
-        (println (str "#trips " chunks))
+        (println (str "#user id " (.getItem js/localStorage user-id-storage)))
       (doseq
         [trip trips]
           (do
@@ -85,11 +87,28 @@
              (> days-ago 0))
       (.search (.-history js/chrome) (search-object days-ago) process-history))))
 
+(defn check-for-user
+    []
+    (do
+    (println "checking for user")
+    (if (not (.getItem js/localStorage user-id-storage))
+        (let [http (js/XMLHttpRequest.)]
+          (.open http "POST" "http://wikihole.clojurecup.com/user/new" true)
+          (.setRequestHeader http "Content-Type" "application/json")
+          (aset http "onreadystatechange" (fn []
+                                            (if (== (.-readyState http) 4)
+                                                (.setItem js/localStorage user-id-storage
+                                                          (aget (.parse js/JSON (.-responseText http)) "user_id")))))
+          (.send http (.stringify js/JSON (js-obj "trip" visits)))
+          ))))
+
 (defn init []
-  (if (and (and js/document
+  (do
+    (check-for-user)
+    (if (and (and js/document
                 (.-getElementById js/document))
            collect-data)
-    (let [btn (.getElementById js/document "send-data")]
-      (set! (.-onclick btn) collect-data))))
+        (let [btn (.getElementById js/document "send-data")]
+            (set! (.-onclick btn) collect-data)))))
 
 (set! (.-onload js/window) init)
