@@ -13,7 +13,7 @@
 
 (defn search-object
   [days]
-  (js-obj "text" (str " - " wiki-title) "startTime" (days-ago days)))
+  (js-obj "text" "" "startTime" (days-ago days)))
 
 (defn clean-title
   [unclean-title]
@@ -28,7 +28,8 @@
         clojurized-hist (js->clj hist :keywordize-keys true) ;todo: filter special wiki content
         hist-in-seconds (map #(update-in % [:lastVisitTime] time-to-millis) clojurized-hist)
         chunks (break-into-trips hist-in-seconds)
-        trips (filter #(> (count %) 1) chunks)]
+        trips (filter #(> (count %) 2) chunks)]
+        (println (str "#trips " chunks))
       (doseq
         [trip trips]
           (do
@@ -37,9 +38,9 @@
              (.getElementById js/document "output"))
             (+ (.-innerHTML
                 (.getElementById js/document "output"))
-               (str "<h3>A trip</h3>" ;todo: a title
+               (str "<h3>A trip!</h3>" ;todo: a title
                     "<ul>"
-                    (clojure.string/join "" (map #(str "<li>" (clean-title (:title %)) "</li>") trip))
+                    (clojure.string/join "" (map #(str "<li>" (clean-title (:title %)) "</li>") (reverse trip)))
                     "</ul>")))))))
 
 (def idle-time-limit 300)
@@ -49,12 +50,17 @@
     (let [result-list (first results)
           previous-visit-time (second results)
           current-visit-time (:lastVisitTime visit)
-          difference (- current-visit-time previous-visit-time)
-          new-result-list (if (> difference idle-time-limit) ;todo: break on homepage, random, etc
-                              (cons (cons visit ()) result-list) ;start new trip
-                              (cons (cons visit (first result-list)) (rest result-list)))] ;append to existing trip
-            [new-result-list current-visit-time]
-          ))
+          difference (- current-visit-time previous-visit-time)]
+          (cond
+                (clojure.string/blank? (:title visit))
+                    [result-list current-visit-time] ;anchor links within wikipedia get stored with no title, ignore
+                (< (.indexOf (:title visit) wiki-title) 1)
+                    [result-list 0] ;break trip chain. todo: break on random, etc
+                (> difference idle-time-limit)
+                    [(cons (cons visit ()) result-list) current-visit-time] ;start new trip
+                :else
+                    [(cons (cons visit (first result-list)) (rest result-list)) current-visit-time] ;append to existing trip
+                    )))
 
 (defn break-into-trips
     [visits]

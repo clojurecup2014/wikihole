@@ -26878,8 +26878,8 @@ wikihole.pluginjs.days_ago = function days_ago(days) {
   return(new Date).getTime() - 1E3 * 60 * 60 * 24 * days;
 };
 wikihole.pluginjs.search_object = function search_object(days) {
-  var obj6345 = {"text":" - " + cljs.core.str.cljs$core$IFn$_invoke$arity$1(wikihole.pluginjs.wiki_title), "startTime":wikihole.pluginjs.days_ago.call(null, days)};
-  return obj6345;
+  var obj7254 = {"text":"", "startTime":wikihole.pluginjs.days_ago.call(null, days)};
+  return obj7254;
 };
 wikihole.pluginjs.clean_title = function clean_title(unclean_title) {
   return unclean_title.replace(" - " + cljs.core.str.cljs$core$IFn$_invoke$arity$1(wikihole.pluginjs.wiki_title), "");
@@ -26891,67 +26891,68 @@ wikihole.pluginjs.process_history = function process_history(hist) {
   var visits = [];
   var clojurized_hist = cljs.core.js__GT_clj.call(null, hist, new cljs.core.Keyword(null, "keywordize-keys", "keywordize-keys", 1310784252), true);
   var hist_in_seconds = cljs.core.map.call(null, function(visits, clojurized_hist) {
-    return function(p1__6346_SHARP_) {
-      return cljs.core.update_in.call(null, p1__6346_SHARP_, new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "lastVisitTime", "lastVisitTime", 1651455457)], null), wikihole.pluginjs.time_to_millis);
+    return function(p1__7255_SHARP_) {
+      return cljs.core.update_in.call(null, p1__7255_SHARP_, new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null, "lastVisitTime", "lastVisitTime", 1651455457)], null), wikihole.pluginjs.time_to_millis);
     };
   }(visits, clojurized_hist), clojurized_hist);
   var chunks = wikihole.pluginjs.break_into_trips.call(null, hist_in_seconds);
   var trips = cljs.core.filter.call(null, function(visits, clojurized_hist, hist_in_seconds, chunks) {
-    return function(p1__6347_SHARP_) {
-      return cljs.core.count.call(null, p1__6347_SHARP_) > 2;
+    return function(p1__7256_SHARP_) {
+      return cljs.core.count.call(null, p1__7256_SHARP_) > 2;
     };
   }(visits, clojurized_hist, hist_in_seconds, chunks), chunks);
-  var seq__6353 = cljs.core.seq.call(null, trips);
-  var chunk__6354 = null;
-  var count__6355 = 0;
-  var i__6356 = 0;
+  cljs.core.println.call(null, "#trips " + cljs.core.str.cljs$core$IFn$_invoke$arity$1(chunks));
+  var seq__7262 = cljs.core.seq.call(null, trips);
+  var chunk__7263 = null;
+  var count__7264 = 0;
+  var i__7265 = 0;
   while (true) {
-    if (i__6356 < count__6355) {
-      var trip = cljs.core._nth.call(null, chunk__6354, i__6356);
-      document.getElementById("output").innerHTML = document.getElementById("output").innerHTML + ("\x3ch3\x3eA trip!\x3c/h3\x3e\x3cul\x3e" + cljs.core.str.cljs$core$IFn$_invoke$arity$1(clojure.string.join.call(null, "", cljs.core.map.call(null, function(seq__6353, chunk__6354, count__6355, i__6356, trip, visits, clojurized_hist, hist_in_seconds, chunks, trips) {
-        return function(p1__6348_SHARP_) {
-          return "\x3cli\x3e" + cljs.core.str.cljs$core$IFn$_invoke$arity$1(wikihole.pluginjs.clean_title.call(null, (new cljs.core.Keyword(null, "title", "title", 636505583)).cljs$core$IFn$_invoke$arity$1(p1__6348_SHARP_))) + "\x3c/li\x3e";
+    if (i__7265 < count__7264) {
+      var trip = cljs.core._nth.call(null, chunk__7263, i__7265);
+      document.getElementById("output").innerHTML = document.getElementById("output").innerHTML + ("\x3ch3\x3eA trip!\x3c/h3\x3e\x3cul\x3e" + cljs.core.str.cljs$core$IFn$_invoke$arity$1(clojure.string.join.call(null, "", cljs.core.map.call(null, function(seq__7262, chunk__7263, count__7264, i__7265, trip, visits, clojurized_hist, hist_in_seconds, chunks, trips) {
+        return function(p1__7257_SHARP_) {
+          return "\x3cli\x3e" + cljs.core.str.cljs$core$IFn$_invoke$arity$1(wikihole.pluginjs.clean_title.call(null, (new cljs.core.Keyword(null, "title", "title", 636505583)).cljs$core$IFn$_invoke$arity$1(p1__7257_SHARP_))) + "\x3c/li\x3e";
         };
-      }(seq__6353, chunk__6354, count__6355, i__6356, trip, visits, clojurized_hist, hist_in_seconds, chunks, trips), trip))) + "\x3c/ul\x3e");
-      var G__6357 = seq__6353;
-      var G__6358 = chunk__6354;
-      var G__6359 = count__6355;
-      var G__6360 = i__6356 + 1;
-      seq__6353 = G__6357;
-      chunk__6354 = G__6358;
-      count__6355 = G__6359;
-      i__6356 = G__6360;
+      }(seq__7262, chunk__7263, count__7264, i__7265, trip, visits, clojurized_hist, hist_in_seconds, chunks, trips), cljs.core.reverse.call(null, trip)))) + "\x3c/ul\x3e");
+      var G__7266 = seq__7262;
+      var G__7267 = chunk__7263;
+      var G__7268 = count__7264;
+      var G__7269 = i__7265 + 1;
+      seq__7262 = G__7266;
+      chunk__7263 = G__7267;
+      count__7264 = G__7268;
+      i__7265 = G__7269;
       continue;
     } else {
-      var temp__4126__auto__ = cljs.core.seq.call(null, seq__6353);
+      var temp__4126__auto__ = cljs.core.seq.call(null, seq__7262);
       if (temp__4126__auto__) {
-        var seq__6353__$1 = temp__4126__auto__;
-        if (cljs.core.chunked_seq_QMARK_.call(null, seq__6353__$1)) {
-          var c__4408__auto__ = cljs.core.chunk_first.call(null, seq__6353__$1);
-          var G__6361 = cljs.core.chunk_rest.call(null, seq__6353__$1);
-          var G__6362 = c__4408__auto__;
-          var G__6363 = cljs.core.count.call(null, c__4408__auto__);
-          var G__6364 = 0;
-          seq__6353 = G__6361;
-          chunk__6354 = G__6362;
-          count__6355 = G__6363;
-          i__6356 = G__6364;
+        var seq__7262__$1 = temp__4126__auto__;
+        if (cljs.core.chunked_seq_QMARK_.call(null, seq__7262__$1)) {
+          var c__4408__auto__ = cljs.core.chunk_first.call(null, seq__7262__$1);
+          var G__7270 = cljs.core.chunk_rest.call(null, seq__7262__$1);
+          var G__7271 = c__4408__auto__;
+          var G__7272 = cljs.core.count.call(null, c__4408__auto__);
+          var G__7273 = 0;
+          seq__7262 = G__7270;
+          chunk__7263 = G__7271;
+          count__7264 = G__7272;
+          i__7265 = G__7273;
           continue;
         } else {
-          var trip = cljs.core.first.call(null, seq__6353__$1);
-          document.getElementById("output").innerHTML = document.getElementById("output").innerHTML + ("\x3ch3\x3eA trip!\x3c/h3\x3e\x3cul\x3e" + cljs.core.str.cljs$core$IFn$_invoke$arity$1(clojure.string.join.call(null, "", cljs.core.map.call(null, function(seq__6353, chunk__6354, count__6355, i__6356, trip, seq__6353__$1, temp__4126__auto__, visits, clojurized_hist, hist_in_seconds, chunks, trips) {
-            return function(p1__6348_SHARP_) {
-              return "\x3cli\x3e" + cljs.core.str.cljs$core$IFn$_invoke$arity$1(wikihole.pluginjs.clean_title.call(null, (new cljs.core.Keyword(null, "title", "title", 636505583)).cljs$core$IFn$_invoke$arity$1(p1__6348_SHARP_))) + "\x3c/li\x3e";
+          var trip = cljs.core.first.call(null, seq__7262__$1);
+          document.getElementById("output").innerHTML = document.getElementById("output").innerHTML + ("\x3ch3\x3eA trip!\x3c/h3\x3e\x3cul\x3e" + cljs.core.str.cljs$core$IFn$_invoke$arity$1(clojure.string.join.call(null, "", cljs.core.map.call(null, function(seq__7262, chunk__7263, count__7264, i__7265, trip, seq__7262__$1, temp__4126__auto__, visits, clojurized_hist, hist_in_seconds, chunks, trips) {
+            return function(p1__7257_SHARP_) {
+              return "\x3cli\x3e" + cljs.core.str.cljs$core$IFn$_invoke$arity$1(wikihole.pluginjs.clean_title.call(null, (new cljs.core.Keyword(null, "title", "title", 636505583)).cljs$core$IFn$_invoke$arity$1(p1__7257_SHARP_))) + "\x3c/li\x3e";
             };
-          }(seq__6353, chunk__6354, count__6355, i__6356, trip, seq__6353__$1, temp__4126__auto__, visits, clojurized_hist, hist_in_seconds, chunks, trips), trip))) + "\x3c/ul\x3e");
-          var G__6365 = cljs.core.next.call(null, seq__6353__$1);
-          var G__6366 = null;
-          var G__6367 = 0;
-          var G__6368 = 0;
-          seq__6353 = G__6365;
-          chunk__6354 = G__6366;
-          count__6355 = G__6367;
-          i__6356 = G__6368;
+          }(seq__7262, chunk__7263, count__7264, i__7265, trip, seq__7262__$1, temp__4126__auto__, visits, clojurized_hist, hist_in_seconds, chunks, trips), cljs.core.reverse.call(null, trip)))) + "\x3c/ul\x3e");
+          var G__7274 = cljs.core.next.call(null, seq__7262__$1);
+          var G__7275 = null;
+          var G__7276 = 0;
+          var G__7277 = 0;
+          seq__7262 = G__7274;
+          chunk__7263 = G__7275;
+          count__7264 = G__7276;
+          i__7265 = G__7277;
           continue;
         }
       } else {
@@ -26967,8 +26968,19 @@ wikihole.pluginjs.reduce_over_visits = function reduce_over_visits(results, visi
   var previous_visit_time = cljs.core.second.call(null, results);
   var current_visit_time = (new cljs.core.Keyword(null, "lastVisitTime", "lastVisitTime", 1651455457)).cljs$core$IFn$_invoke$arity$1(visit);
   var difference = current_visit_time - previous_visit_time;
-  var new_result_list = difference > wikihole.pluginjs.idle_time_limit ? cljs.core.cons.call(null, cljs.core.cons.call(null, visit, cljs.core.List.EMPTY), result_list) : cljs.core.cons.call(null, cljs.core.cons.call(null, visit, cljs.core.first.call(null, result_list)), cljs.core.rest.call(null, result_list));
-  return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new_result_list, current_visit_time], null);
+  if (cljs.core.truth_(clojure.string.blank_QMARK_.call(null, (new cljs.core.Keyword(null, "title", "title", 636505583)).cljs$core$IFn$_invoke$arity$1(visit)))) {
+    return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [result_list, current_visit_time], null);
+  } else {
+    if ((new cljs.core.Keyword(null, "title", "title", 636505583)).cljs$core$IFn$_invoke$arity$1(visit).indexOf(wikihole.pluginjs.wiki_title) < 1) {
+      return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [result_list, 0], null);
+    } else {
+      if (difference > wikihole.pluginjs.idle_time_limit) {
+        return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cons.call(null, cljs.core.cons.call(null, visit, cljs.core.List.EMPTY), result_list), current_visit_time], null);
+      } else {
+        return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cons.call(null, cljs.core.cons.call(null, visit, cljs.core.first.call(null, result_list)), cljs.core.rest.call(null, result_list)), current_visit_time], null);
+      }
+    }
+  }
 };
 wikihole.pluginjs.break_into_trips = function break_into_trips(visits) {
   return cljs.core.first.call(null, cljs.core.reduce.call(null, wikihole.pluginjs.reduce_over_visits, new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.List.EMPTY, 0], null), cljs.core.reverse.call(null, visits)));
@@ -26978,8 +26990,8 @@ wikihole.pluginjs.send_visits = function send_visits(visits) {
   http.open("POST", "http://wikihole.clojurecup.com/user/1/trip", true);
   http.setRequestHeader("Content-Type", "application/json");
   return http.send(JSON.stringify(function() {
-    var obj6372 = {"trip":visits};
-    return obj6372;
+    var obj7281 = {"trip":visits};
+    return obj7281;
   }()));
 };
 wikihole.pluginjs.collect_data = function collect_data() {
