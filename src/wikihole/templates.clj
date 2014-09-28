@@ -6,6 +6,14 @@
         [hiccup.page]
         [hiccup.form]))
 
+
+;;;;;;;;;;;;;;;;;;;;
+;;;;; TODO !!!!!
+;;;;;;;;;;;;;;;;;;;;
+
+(def download-link "#")
+(def about-link "#")
+
 ;;;;;;;;; Hiccup documentation: https://github.com/weavejester/hiccup
 
 (defn head
@@ -24,12 +32,10 @@
           [:li.name [:h1 [:a {:href "/"} "Down the Wikihole!"]]]]
          [:section.top-bar-section
           [:ul.right
-           [:li ;; TODO make page
-            [:a {:href "#"} "About"]]
-           [:li ;; TODO make page, make conditional
-            [:a {:href "#"} "Dashboard"]]
-           [:li ;; TODO make conditional
-            [:a {:href "/signup"} "Signup"]]]]]))
+           [:li
+            [:a {:href about-link} "About"]]
+           [:li
+            [:a {:href download-link} "Download Plugin"]]]]]))
 
 (defn masthead
   ([title]
@@ -80,7 +86,7 @@
       (masthead title
                 (html [:div.row
                        [:div.small-12.columns.small-text-center
-                        [:a.button.large {:href "/signup"} "Sign Up"]]]))
+                        [:a.button.large {:href download-link} "Download Plugin"]]]))
       (html
        [:h3.small-text-center "Enjoy the ride. We'll chart your adventures."]
        [:p.small-12.medium-8.columns.medium-centered.small-text-center
