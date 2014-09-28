@@ -8,6 +8,7 @@
   (use clojure.walk))
 
 (defroutes api-routes
+  (OPTIONS "*" [] (ring.util.response/response nil))
   (POST ["/user/:userId/trip", :userId #"[0-9]+"] {params :params body :body} (do (println (str "##body: " (doall (keywordize-keys body)))) (data-access/save-trip (read-string (:userId params)) (keywordize-keys body))))
   (GET ["/trip/:tripId", :tripId #"[0-9]+"] [tripId] (data-access/get-trip (read-string tripId)))
   (GET ["/user/:userId/trips", :userId #"[0-9]+"] [userId] (data-access/get-trips-for-user (read-string userId)))
@@ -21,7 +22,8 @@
         (if response
         (-> response
         (assoc-in [:headers "Access-Control-Allow-Origin"] "*")
-        (assoc-in [:headers "Access-Control-Allow-Headers"] "Origin, X-Requested-With, Content-Type, Accept"))))))
+        (assoc-in [:headers "Access-Control-Allow-Headers"] "Origin, X-Requested-With, Content-Type, Accept")
+        (assoc-in [:headers "Access-Control-Allow-Methods"] "POST, OPTIONS"))))))
 
 
 (def rest-api
