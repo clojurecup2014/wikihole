@@ -1,11 +1,12 @@
 (ns wikihole.data-access
   (:require [clojure.data.json :as json])
-  (require [ring.util.response :as r]))
+  (require [ring.util.response :as r]
+  [wikihole.queries :as q]))
 
 (defn save-trip
-    [user-id trip-events]
-    (println trip-events)
-    (r/created (str "this/will/be/url/for/" user-id "/new/trip"))) ;TODO
+    [user-id trip]
+    (println (str "#" trip))
+    (r/created (str "this/will/be/url/for/" (q/add-trip! user-id trip) "/new/trip"))) ;TODO
 
 (def dummy-trip
     (json/write-str {   :user 1
@@ -15,7 +16,7 @@
 
 (defn get-trip
     [trip-id]
-    (-> (r/response dummy-trip)
+    (-> (r/response (q/get-trip-by-id trip-id))
         (r/content-type "application/json")))
 
 (def dummy-trips
@@ -23,5 +24,5 @@
 
 (defn get-trips-for-user
     [user-id]
-    (-> (r/response dummy-trips)
+    (-> (r/response (q/get-user-trips user-id))
         (r/content-type "application/json")))
