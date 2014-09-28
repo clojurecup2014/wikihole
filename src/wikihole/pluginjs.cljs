@@ -17,9 +17,12 @@
 
 (defn collect-data
   []
-  (if (and js/chrome
-           (.-history js/chrome))
-    (.search (.-history js/chrome) (search-object default-days-ago) callback-fn)))
+  (let [days-ago (js/parseInt (.-value (.getElementById js/document "num-days")))]
+    (if (and js/chrome
+             (.-history js/chrome)
+             (number? days-ago)
+             (> days-ago 0))
+        (.search (.-history js/chrome) (search-object days-ago) callback-fn))))
 
 (defn init []
   (if (and (and js/document

@@ -13,7 +13,7 @@
 (def body-font "Arial")
 (def header-font "Courier")
 (def body-font-size "18px")
-(def min-width "500px")
+(def min-width "400px")
 
 (def colors {:body-background "white"
              :body-font "#222"
@@ -69,8 +69,10 @@
      (include-js "popup.js")
      (include-css "main.css")]
     [:body.text-center
-     [:h1.text-center "Hello, world! This is the Wikihole Chrome extension, v. 0.0."]
-     [:p.text-center "Document your Wikitrip:"]
+     [:h1.text-center "So you've been down the Wikihole, have you?"]
+     [:p.text-center "Document Wikitrips since:"]
+     [:input#num-days {:type "number"}]
+     [:label {:for "num-days"} "Days Ago"]
      [:button#send-data.button "Go!"]])))
 
 (defn write-plugin
