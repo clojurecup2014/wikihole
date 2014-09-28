@@ -91,7 +91,11 @@
        [:h3.small-text-center {:style "margin-bottom:30px;"} "Enjoy the ride. We'll chart your adventures."]
        [:p.small-12.medium-8.columns.medium-centered.small-text-center
         (str "Document the fun times you had looking up something for work/school, "
-             "and then, hours later, finding yourself on a page about dinosaurs.")]))))
+             "and then, hours later, finding yourself on a page about dinosaurs.")]
+       [:h3.small-text-center {:style "margin-top:70px;margin-bottom:40px;"}
+        "We are still in development.<br />Keep checking back for updates!"]
+       [:p.small-text-center {:style "margin-bottom: 90px;"}
+        [:a.button.large {:href "/trip/3/view"} "See an Example Trip"]]))))
 
 (defn signup
   []
