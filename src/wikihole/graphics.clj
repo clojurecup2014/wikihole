@@ -39,22 +39,32 @@
 (defn string-keys-to-symbols [map]
   (reduce #(assoc %1 (-> (key %2) keyword) (val %2)) {} map))
 
+(defn parse-title-from-url
+  [url]
+  (let [prefix #"http://en.wikipedia.org/wiki/"]
+    (clojure.string/replace
+     (clojure.string/replace
+      (clojure.string/replace
+       url prefix "") ;; remove URL parts
+      "_" " ") ;; replace underscores
+     #"#.*" ""))) ;; remove # endings
+
 (defn user-graphs
   [user-trips-json-string]
   (let [data (vec (map string-keys-to-symbols (json/read-str user-trips-json-string)))
-      all-trips (vec (map string-keys-to-symbols (get (first data) :trips)))
-      trips (vec (remove (fn [itm] (= 0 (count (get itm :visits)))) all-trips))]
-  (html
-   [:div#container
-    (reduce
-     str
-     (for [trip trips]
-       [:div#trip
-        [:h1 "Trip " (get trip :trip_id)]
-       (for [visit (vec (map string-keys-to-symbols (get trip :visits)))]
+        all-trips (vec (map string-keys-to-symbols (get (first data) :trips)))
+        trips (vec (remove (fn [itm] (= 0 (count (get itm :visits)))) all-trips))]
+    (html
+     [:div#container
+      (reduce
+       str
+       (for [trip trips]
          [:div#trip
-          [:h1 (get visit :url)]
-          [:p "Visited At: " (get visit :time_visited)]]
-         )]))])))
+          [:h1 "Trip " (get trip :trip_id)]
+          (for [visit (vec (map string-keys-to-symbols (get trip :visits)))]
+            [:div#trip
+             [:h1 (parse-title-from-url (get visit :url))]
+             [:p "Visited At: " (get visit :time_visited)]]
+            )]))])))
 
 
