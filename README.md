@@ -3,9 +3,8 @@
 Super cool stuff!
 
 ## TODOs
-- ~~Set up deployment~~
-- Web app structure
-- Plugin
+- Get link outputted in plugin
+- Package up plugin somehow - enable user to download
 - Prettify
 
 ## Running
