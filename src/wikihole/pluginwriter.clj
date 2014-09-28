@@ -51,7 +51,6 @@
     "version" "0.0",
     "description" "Chart your journey down the Wikihole!",
     "browser_action" {
-                      ;; "default_icon" "icon.png",
                       "default_popup" "popup.html"
                       "default_icon" "icon.png"
                       },

@@ -1,5 +1,7 @@
 (ns wikihole.pluginjs)
 
+(def paramStr "userId=0")
+
 (enable-console-print!)
 
 (def wiki-title "Wikipedia, the free encyclopedia")
@@ -17,16 +19,27 @@
   (.replace unclean-title (str " - " wiki-title) ""))
 
 (defn process-history [hist]
-  (doseq
+  (let [visits (array)]
+   (doseq
     [itm hist]
     (if
       (not (= (.-title itm) wiki-title))
-      (set!
-       (.-innerHTML
-        (.getElementById js/document "output"))
-       (+ (.-innerHTML
-           (.getElementById js/document "output"))
-          (str "<li>" (clean-title (.-title itm)) "</li>")))))) ;; :url :title :lastVisitTime
+      (do
+        (set!
+        (.-innerHTML
+         (.getElementById js/document "output"))
+        (+ (.-innerHTML
+            (.getElementById js/document "output"))
+           (str "<li>" (clean-title (.-title itm)) "</li>")))
+        (.push visits (js-obj "time_visited" (.-lastVisitTime itm) "url" (.-url itm))))))
+    (send-visits visits)))
+
+(defn send-visits [visits]
+  ;;(doseq [vs visits]
+  ;;  (println (.-url vs)))
+  (let [http (js/XMLHttpRequest.)]
+    (.open http "POST" "http://localhost:3000/user/0/trip" true)
+    (.send http visits)))
 
 (defn collect-data
   []
