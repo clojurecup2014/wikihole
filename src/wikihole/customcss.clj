@@ -44,7 +44,7 @@
     :font-weight header-font-weight}]
   [:#masthead
    {:background-color (get colors :masthead-bg)
-    :margin "0px"
+    :margin "0px 0px 40px 0"
     :padding "40px 0"}
    [:h1 :h2 :h3 :h4 :h5 :h6 {:color (get colors :masthead-color)}]])
 
