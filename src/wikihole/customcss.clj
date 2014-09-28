@@ -12,6 +12,8 @@
 (def header-font "Roboto Slab")
 (def header-font-weight "700")
 (def body-font-size "18px")
+(def svg-width "100%")
+(def svg-height "500px")
 
 (def colors {:body-background "white"
              :body-font "#222"
@@ -46,5 +48,6 @@
    {:background-color (get colors :masthead-bg)
     :margin "0px 0px 40px 0"
     :padding "40px 0"}
-   [:h1 :h2 :h3 :h4 :h5 :h6 {:color (get colors :masthead-color)}]])
+   [:h1 :h2 :h3 :h4 :h5 :h6 {:color (get colors :masthead-color)}]]
+  [:svg {:width svg-width :height svg-height :margin "20px auto" :display "block"}])
 
