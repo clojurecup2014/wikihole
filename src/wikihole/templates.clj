@@ -32,8 +32,8 @@
           [:li.name [:h1 [:a {:href "/"} "Down the Wikihole!"]]]]
          [:section.top-bar-section
           [:ul.right
-           [:li
-            [:a {:href about-link} "About"]]
+           ;;[:li
+           ;; [:a {:href about-link} "About"]]
            [:li
             [:a {:href download-link} "Download Plugin"]]]]]))
 
