@@ -46,8 +46,11 @@
     :font-weight header-font-weight}]
   [:#masthead
    {:background-color (get colors :masthead-bg)
-    :margin "0px 0px 40px 0"
+    :margin "0px 0px 60px 0"
     :padding "40px 0"}
    [:h1 :h2 :h3 :h4 :h5 :h6 {:color (get colors :masthead-color)}]]
+  [:.top-bar [:ul [:li
+                   [:a {:font-family body-font :font-weight body-font-weight}]
+                   [:h1 [:a {:font-family header-font :font-weight header-font-weight}]]]]]
   [:svg {:width svg-width :height svg-height :margin "20px auto" :display "block"}])
 

@@ -88,7 +88,7 @@
                        [:div.small-12.columns.small-text-center
                         [:a.button.large {:href download-link} "Download Plugin"]]]))
       (html
-       [:h3.small-text-center "Enjoy the ride. We'll chart your adventures."]
+       [:h3.small-text-center {:style "margin-bottom:30px;"} "Enjoy the ride. We'll chart your adventures."]
        [:p.small-12.medium-8.columns.medium-centered.small-text-center
         (str "Document the fun times you had looking up something for work/school, "
              "and then, hours later, finding yourself on a page about dinosaurs.")]))))
