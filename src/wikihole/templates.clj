@@ -1,8 +1,7 @@
 (ns wikihole.templates
   (:require [wikihole.customcss :as customcss]
             [wikihole.graphics :as graphics]
-            [clojure.data.json :as json]
-            [wikihole.queries :as q])
+            [clojure.data.json :as json])
   (:use [hiccup.core]
         [hiccup.page]
         [hiccup.form]))
@@ -126,4 +125,4 @@
   [id]
   (default
     "Your Trip Down the Wikihole"
-    (graphics/trip-graphs id (json/write-str (q/get-trip-by-id id)))))
+    (graphics/trip-graphs id test-trip-json-string)))
