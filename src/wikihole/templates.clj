@@ -102,3 +102,9 @@
   (default
     (str "User " id " | Wikihole Trips") ;; Title here
     (graphics/user-graphs test-trips-json-string))) ;; TODO make JSON string from DB call
+
+(defn trip-index
+  [id]
+  (default
+    (str "Trip " id " | Down the Wikihole!")
+    (html [:p "YAY"])))
