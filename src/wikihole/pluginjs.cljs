@@ -38,7 +38,7 @@
  ; (doseq [vs visits]
   ; (println visits)
   (let [http (js/XMLHttpRequest.)]
-    (.open http "POST" "http://localhost:3000/user/1/trip" true)
+    (.open http "POST" "http://wikihole.clojurecup.com/user/1/trip" true)
     (.setRequestHeader http "Content-Type" "application/json")
     (.send http (.stringify js/JSON (js-obj "trip" visits)))))
 
