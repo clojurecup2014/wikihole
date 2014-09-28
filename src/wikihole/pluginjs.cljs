@@ -2,8 +2,6 @@
 
 (enable-console-print!)
 
-(def default-days-ago 7)
-
 (defn days-ago
   [days]
   (- (.getTime (js/Date.)) (* 1000 60 60 24 days)))
@@ -13,7 +11,14 @@
   (.log js/console (str "Days ago: " days))
   (js-obj "text" "Wikipedia, the free encyclopedia" "startTime" (days-ago days)))
 
-(defn callback-fn [stuff] (.log js/console stuff))
+(defn process-history [hist]
+  (doseq [itm hist]
+    (set!
+     (.-innerHTML
+      (.getElementById js/document "output"))
+     (+ (.-innerHTML
+         (.getElementById js/document "output"))
+        (str "<li>" (.-title itm) "</li>"))))) ;; :url :title :lastVisitTime
 
 (defn collect-data
   []
@@ -22,7 +27,9 @@
              (.-history js/chrome)
              (number? days-ago)
              (> days-ago 0))
-        (.search (.-history js/chrome) (search-object days-ago) callback-fn))))
+      (.search (.-history js/chrome) (search-object days-ago) process-history))))
+
+
 
 (defn init []
   (if (and (and js/document

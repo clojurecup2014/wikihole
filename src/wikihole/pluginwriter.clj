@@ -14,6 +14,7 @@
 (def header-font "Courier")
 (def body-font-size "18px")
 (def min-width "400px")
+(def default-days-ago "7")
 
 (def colors {:body-background "white"
              :body-font "#222"
@@ -23,6 +24,7 @@
 
 (defstyles screen ;;; lein garden auto compiles this
   [:.text-center {:text-align "center"}]
+  [:.text-left {:text-align "left"}]
   [:body {:color (get colors :body-font)
           :background-color (get colors :body-background)
           :width min-width}]
@@ -71,9 +73,10 @@
     [:body.text-center
      [:h1.text-center "So you've been down the Wikihole, have you?"]
      [:p.text-center "Document Wikitrips since:"]
-     [:input#num-days {:type "number"}]
+     [:input#num-days {:type "number" :value default-days-ago}]
      [:label {:for "num-days"} "Days Ago"]
-     [:button#send-data.button "Go!"]])))
+     [:button#send-data.button "Go!"]
+     [:ul#output.text-left]])))
 
 (defn write-plugin
   []
