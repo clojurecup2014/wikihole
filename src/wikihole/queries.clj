@@ -5,8 +5,8 @@
 (use 'korma.core)
 (use 'korma.db)
 
-(defdb prod (postgres {:db (System/getProperty "db-name") 
-                       :user (System/getProperty "db-user")
+(defdb prod (postgres {:db (or (System/getProperty "db-name") "postgres")
+                       :user (or (System/getProperty "db-user") "postgres")
                        :password (System/getProperty "db-password")
                        ;; optional keys
                        :host "localhost"
@@ -32,10 +32,10 @@
 
 (defn add-trip!
     [user-id new-trip]
-    (let [inserted-trip (insert trips (values {:user_id user-id}))
+    (let [inserted-trip (insert trips (values {:users_id user-id}))
           new-trip-id (:trip_id inserted-trip)
           trip-values (map #(assoc % :trip_id new-trip-id) (:trip new-trip))]
-        (println trip-values)
+        (println (str "##trip body values: " (doall (map println trip-values))))
         (insert visits (values trip-values))))
 
 (defn add-user! []

@@ -38,7 +38,8 @@
   ;;(doseq [vs visits]
   ;;  (println (.-url vs)))
   (let [http (js/XMLHttpRequest.)]
-    (.open http "POST" "http://localhost:3000/user/0/trip" true)
+    (.open http "POST" "http://localhost:3000/user/1/trip" true)
+    (.setRequestHeader http "Content-Type" "application/json")
     (.send http visits)))
 
 (defn collect-data
