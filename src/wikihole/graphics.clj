@@ -69,7 +69,9 @@
 (defn trip-graphs
   [trip-json-string]
   (let [trip (get (json/read-str trip-json-string) "visits")]
-    (str (html [:div#chart-container {:style "width:100%;height:500px;"}])
+    (str (html
+          [:h1.small-text-center "Time Per Page"]
+          [:div#chart-container {:style "width:100%;height:500px;"}])
          (reduce
           str
           (for [visit trip]

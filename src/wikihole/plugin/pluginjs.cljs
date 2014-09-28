@@ -24,6 +24,7 @@
   (.floor js/Math (/ weird-chrome-time 1000)))
 
 (defn process-history [hist]
+  (println hist)
   (let [visits (array)
         clojurized-hist (js->clj hist :keywordize-keys true) ;todo: filter special wiki content
         hist-in-seconds (map #(update-in % [:lastVisitTime] time-to-millis) clojurized-hist)

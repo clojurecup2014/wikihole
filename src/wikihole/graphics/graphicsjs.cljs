@@ -46,19 +46,30 @@
       [color1 "#219ae0" ;; blue
        color2 "#b300bc" ;; magenta
        color3 "#00bc8d" ;; green
-       label-text-opts (js-obj "font-weight" "bold" "font-size" "13px")
+       label-text-opts (js-obj "font-weight" "bold" "font-size" "16px")
        x-label "Time of Lookup"
-       y-label "Time Spent on Page"
+       y-label "Time Spent on Page (minutes)"
+       gutter 20
+       x 130
+       y 10
+       xlen 800
+       ylen 330
        xdata (remove-last (make-time-data))
-       ydata (make-per-page-data)
+       ydata (.map (make-per-page-data) (fn [itm] (/ (/ itm 1000.0) 60.0)))
        paper (js/Raphael. "chart-container" 500 500)
+       x-label (.text paper (+ (/ xlen 1.7) (* 2 gutter)) (+ ylen (* 1.8 gutter)) x-label)
+       y-label (.text paper (* 4.5 gutter) (/ ylen 2) y-label)
        chart (. paper linechart
-                60 10 800 330 xdata ydata
-                (js-obj "gutter" 20 "nostroke" false
+                x y xlen ylen xdata ydata
+                (js-obj "gutter" gutter "nostroke" false
                         "axis" "0 0 1 1" "axisystep" 10
                         "symbol" "circle" "smooth" true
-                        "width" 1.2
-                        "colors" (array color1 color2 color3)))])))
+                        "width" 2
+                        "colors" (array color1 color2 color3)))]
+
+      (.attr x-label label-text-opts)
+      (.attr y-label label-text-opts)
+      (.transform y-label "R270"))))
 
 (defn init
   []
