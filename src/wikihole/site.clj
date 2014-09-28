@@ -10,7 +10,7 @@
   (GET "/user/:id" [id] (templates/user-index id))
   (GET "/signup" [] (templates/signup))
   (POST "/signup" [username] (templates/signup-complete username))
-  (GET "/test-chart" [] (templates/default "Test Chart" (graphics/test)))
+  (GET "/test-chart" [] (templates/default "Test Chart" (graphics/test-chart)))
   (route/resources "/")
   (route/not-found "Not Found"))
 

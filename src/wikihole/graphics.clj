@@ -5,6 +5,9 @@
   (:require [c2.scale :as scale]
             [clojure.data.json :as json]))
 
+(import '[java.util Date]
+        '[java.text SimpleDateFormat])
+
 ;;;;;;;;;; C2 documentation: https://github.com/lynaghk/c2
 
 (defn css-str
@@ -21,7 +24,7 @@
                                 (str (property attrs) (:num-format attrs))
                                 (property attrs))))))))
 
-(defn test
+(defn test-chart
   "To be deleted. Visible for now at /test-chart."
   []
   (html (let [width 300, bar-height 30
@@ -49,6 +52,12 @@
       "_" " ") ;; replace underscores
      #"#.*" ""))) ;; remove # endings
 
+(defn pretty-date
+  [millis]
+  (let [date-style (new SimpleDateFormat "EEEE, MMMM dd, yyyy, h:mm a")
+        my-date (new Date (* 1000 millis))]
+    (.format date-style my-date)))
+
 (defn user-graphs
   [user-trips-json-string]
   (let [data (vec (map string-keys-to-symbols (json/read-str user-trips-json-string)))
@@ -64,7 +73,5 @@
           (for [visit (vec (map string-keys-to-symbols (get trip :visits)))]
             [:div#trip
              [:h1 (parse-title-from-url (get visit :url))]
-             [:p "Visited At: " (get visit :time_visited)]]
+             [:p (pretty-date (get visit :time_visited))]]
             )]))])))
-
-
