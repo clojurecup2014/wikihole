@@ -35,7 +35,8 @@
     (let [inserted-trip (insert trips (values {:users_id user-id}))
           new-trip-id (:trip_id inserted-trip)
           trip-values (map #(assoc % :trips_id new-trip-id) (:trip new-trip))]
-        (insert visits (values trip-values))))
+        (insert visits (values trip-values))
+        new-trip-id))
 
 (defn add-user! []
    (:user_id (first (exec-raw ["insert into users default values returning *"] :results))))
@@ -44,4 +45,4 @@
     (select users (with trips (with visits (order :time_visited :ASC))) (where {:user_id user-id})))
 
 (defn get-trip-by-id [trip-id]
-    (select trips (with visits (order :time_visited :ASC)) (where {:trip_id trip-id})))
+    (first (select trips (with visits (order :time_visited :ASC)) (where {:trip_id trip-id}))))

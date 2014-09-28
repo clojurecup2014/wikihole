@@ -5,7 +5,8 @@
 
 (defn save-trip
     [user-id trip]
-    (r/created (str "this/will/be/url/for/" (:trip_id (q/add-trip! user-id trip)) "/new/trip")))
+    (-> (r/response {:trip_id (q/add-trip! user-id trip)})
+        (r/content-type "application/json")))
 
 (defn get-trip
     [trip-id]
@@ -19,4 +20,5 @@
 
 (defn create-user
     []
-    (r/created (str "this/will/be/url/for/" (q/add-user!) "/new/user")))
+     (-> (r/response {:user_id (q/add-user!)})
+     (r/content-type "application/json")))
