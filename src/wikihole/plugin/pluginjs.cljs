@@ -31,7 +31,7 @@
         clojurized-hist (js->clj hist :keywordize-keys true) ;todo: filter special wiki content
         hist-in-seconds (map #(update-in % [:lastVisitTime] time-to-millis) clojurized-hist)
         chunks (break-into-trips hist-in-seconds)
-        trips (filter #(> (count %) 2) chunks)]
+        trips (map vector (iterate inc 0) (filter #(> (count %) 2) chunks))]
         (println (str "#user id " (.getItem js/localStorage user-id-storage)))
       (doseq
         [trip trips]
@@ -40,11 +40,33 @@
             (.-innerHTML
              (.getElementById js/document "output"))
             (+ (.-innerHTML
-                (.getElementById js/document "output"))
+               (.getElementById js/document "output"))
                (str "<h3>A trip!</h3>" ;todo: a title
                     "<ul>"
-                    (clojure.string/join "" (map #(str "<li>" (clean-title (:title %)) "</li>") (reverse trip)))
-                    "</ul>")))))))
+                    (clojure.string/join "" (map #(str "<li>" (clean-title (:title %)) "</li>") (reverse (second trip))))
+                    "</ul>"
+                    (str "<button class='button' id='trip" (first trip) "'>View it!</button>"))))))
+      (doseq
+        [trip trips]
+          (let [btn (.getElementById js/document (str "trip" (first trip)))
+                save-trip-func (fn []
+                                    (save-trip (second trip)))]
+                  (set! (.-onclick btn) save-trip-func))
+        )))
+
+(defn save-trip
+    [visits]
+      (let [http (js/XMLHttpRequest.)
+            parsed-visits (map #(select-keys % [:lastVisitTime :url]) visits)]
+        (println (str "##hi" {:trip parsed-visits}))
+        (println (str "final" (.stringify js/JSON (clj->js {:trip parsed-visits}))))
+        (.open http "POST" (str "http://wikihole.clojurecup.com/user/" (.getItem js/localStorage user-id-storage) "/trip") true)
+        (.setRequestHeader http "Content-Type" "application/json")
+        (aset http "onreadystatechange" (fn []
+                                           (if (== (.-readyState http) 4)
+                                              (println (aget (.parse js/JSON (.-responseText http)) "trip_id"))
+                                                )))
+        (.send http (.stringify js/JSON (clj->js {:trip parsed-visits})))))
 
 (def idle-time-limit 300)
 
