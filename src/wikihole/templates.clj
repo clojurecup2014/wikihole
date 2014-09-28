@@ -101,6 +101,16 @@
   [username]
   (default "Signup Complete" (str "Thanks for signing up, " username "!")))
 
+(defn four-o-four
+  []
+  (default
+    "404 Not Found"
+    (html
+     [:div.row
+      [:div.small-12.columns.small-text-center
+       [:p.small-text-center "Couldn't find what you were looking for."]
+       [:a.button.large {:href "/"} "Go Back Home"]]])))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;; TODO!!!!
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;

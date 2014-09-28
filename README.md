@@ -6,7 +6,6 @@ Super cool stuff!
 - Get link outputted in plugin
 - Package up plugin somehow - enable user to download
 - Prettify
-- Add 404 page
 
 ## Running
 

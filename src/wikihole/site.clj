@@ -1,4 +1,5 @@
 (ns wikihole.site
+  (:use [hiccup.core])
   (:require [compojure.core :refer :all]
             [compojure.handler :as handler]
             [compojure.route :as route]
@@ -11,9 +12,8 @@
   (GET "/trip/:id/view" [id] (templates/trip-index id))
   (GET "/signup" [] (templates/signup))
   (POST "/signup" [username] (templates/signup-complete username))
-  (GET "/test-chart" [] (templates/default "Test Chart" (graphics/test-chart-two)))
   (route/resources "/")
-  (route/not-found "Not Found"))
+  (route/not-found (templates/four-o-four)))
 
 (def site
   (handler/site site-routes))
