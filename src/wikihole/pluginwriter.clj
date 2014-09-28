@@ -13,18 +13,33 @@
 (def body-font "Arial")
 (def header-font "Courier")
 (def body-font-size "18px")
+(def min-width "500px")
 
 (def colors {:body-background "white"
-             :body-font "#222"})
+             :body-font "#222"
+             :button-bg "#78389e"
+             :button-bg-hover "#602d7e"
+             :button-font "white"})
 
 (defstyles screen ;;; lein garden auto compiles this
+  [:.text-center {:text-align "center"}]
   [:body {:color (get colors :body-font)
-          :background-color (get colors :body-background)}]
+          :background-color (get colors :body-background)
+          :width min-width}]
   [:body :p :li :label :.button :input
    {:font-family body-font
     :font-size body-font-size}]
   [:h1 :h2 :h3 :h4 :h5 :h6
-   {:font-family header-font}])
+   {:font-family header-font
+    :font-size "24px"}]
+  [:button.button
+   {:padding "10px 20px"
+    :background-color (get colors :button-bg)
+    :color (get colors :button-font)
+    :outline "none"
+    :border-width "0px"
+    :cursor "pointer"}
+   [:&:hover {:background-color (get colors :button-bg-hover)}]])
 
 (defn manifest-str
   []
@@ -53,10 +68,10 @@
      [:title "Down the Wikihole!"]
      (include-js "popup.js")
      (include-css "main.css")]
-    [:body
-     [:h1 "Hello, world! This is the Wikihole Chrome extension. v. 0.0."]])))
-
-(html-str)
+    [:body.text-center
+     [:h1.text-center "Hello, world! This is the Wikihole Chrome extension, v. 0.0."]
+     [:p.text-center "Document your Wikitrip:"]
+     [:button#send-data.button "Go!"]])))
 
 (defn write-plugin
   []

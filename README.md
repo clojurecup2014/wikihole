@@ -3,7 +3,7 @@
 Super cool stuff!
 
 ## TODOs
-- Set up deployment
+- ~~Set up deployment~~
 - Web app structure
 - Plugin
 - Prettify
@@ -32,7 +32,7 @@ See: [https://github.com/noprompt/lein-garden](https://github.com/noprompt/lein-
 
 ## Plugin
 
-The code to write the plugin is in /plugin/plugin_writer.clj.
+The code to write the plugin is in /src/wikihole/pluginwriter.clj.
 I've been building it in the REPL with the line:
 
     (write-plugin)
