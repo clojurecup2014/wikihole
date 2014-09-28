@@ -18,12 +18,14 @@
     [handler]
     (fn [request]
      (let [response (handler request)]
+        (if response
         (-> response
         (assoc-in [:headers "Access-Control-Allow-Origin"] "*")
-        (assoc-in [:headers "Access-Control-Allow-Headers"] "Origin, X-Requested-With, Content-Type, Accept")))))
+        (assoc-in [:headers "Access-Control-Allow-Headers"] "Origin, X-Requested-With, Content-Type, Accept"))))))
+
 
 (def rest-api
   (-> (handler/api api-routes)
+      (allow-cross-origin)
         (middleware/wrap-json-body)
-        (middleware/wrap-json-response)
-        (allow-cross-origin)))
+        (middleware/wrap-json-response)))
