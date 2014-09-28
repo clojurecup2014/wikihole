@@ -13,7 +13,7 @@
 
 (defn search-object
   [days]
-  (js-obj "text" "" "startTime" (days-ago days)))
+  (js-obj "text" "" "startTime" (days-ago days) "maxResults" 0))
 
 (defn clean-title
   [unclean-title]
@@ -29,7 +29,7 @@
         hist-in-seconds (map #(update-in % [:lastVisitTime] time-to-millis) clojurized-hist)
         chunks (break-into-trips hist-in-seconds)
         trips (filter #(> (count %) 2) chunks)]
-        (println (str "#trips " chunks))
+        (println (str "#trips " clojurized-hist))
       (doseq
         [trip trips]
           (do
