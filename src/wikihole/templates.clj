@@ -22,7 +22,7 @@
   [:head [:title title]
    (customcss/google-font-tag)
    (include-css "/stylesheets/normalize.css" "/stylesheets/foundation.min.css" "/stylesheets/main.css")
-   (include-js "/javascripts/main.js")])
+   (include-js "/javascripts/raphael.min.js" "/javascripts/main.js")])
 
 (defn navigation
   "Builds the navigation menu used site-wide"

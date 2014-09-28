@@ -18,7 +18,10 @@
   :ring {:handler wikihole.handler/app}
   :cljsbuild {:builds [{ ;; For the plugin
                         :source-paths ["src/wikihole"]
-                        :compiler {:output-to "resources/public/plugin/popup.js"}}]}
+                        :compiler {:output-to "resources/public/plugin/popup.js"}}
+                       { ;; For the web app
+                        :source-paths ["src/wikihole/graphics"]
+                        :compiler {:output-to "resources/public/javascripts/main.js"}}]}
   :garden {:builds [{;; For the website
                      :source-paths ["src"]
                      ;; The var containing your stylesheet:
