@@ -5,9 +5,6 @@
             [wikihole.templates :as templates]
             [wikihole.graphics :as graphics]))
 
-;; We need sessions and users!
-;; Something we can use for sessions:
-;; https://github.com/ring-clojure/ring/blob/master/ring-core/src/ring/middleware/session.clj
 (defroutes site-routes
   (GET "/" [] (templates/index))
   (GET "/user/:id" [id] (templates/user-index id))

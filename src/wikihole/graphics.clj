@@ -2,7 +2,8 @@
   (:use [c2.core :only [unify]]
         [clojure.string :as string :only [join]]
         [hiccup.core])
-  (:require [c2.scale :as scale]))
+  (:require [c2.scale :as scale]
+            [clojure.data.json :as json]))
 
 ;;;;;;;;;; C2 documentation: https://github.com/lynaghk/c2
 
@@ -34,3 +35,26 @@
                                                  :width (s val)
                                                  :background-color "gray"})}
                           [:span {:style (css-str {:color "white"})} label]]))])))
+
+(defn string-keys-to-symbols [map]
+  (reduce #(assoc %1 (-> (key %2) keyword) (val %2)) {} map))
+
+(defn user-graphs
+  [user-trips-json-string]
+  (let [data (vec (map string-keys-to-symbols (json/read-str user-trips-json-string)))
+      all-trips (vec (map string-keys-to-symbols (get (first data) :trips)))
+      trips (vec (remove (fn [itm] (= 0 (count (get itm :visits)))) all-trips))]
+  (html
+   [:div#container
+    (reduce
+     str
+     (for [trip trips]
+       [:div#trip
+        [:h1 "Trip " (get trip :trip_id)]
+       (for [visit (vec (map string-keys-to-symbols (get trip :visits)))]
+         [:div#trip
+          [:h1 (get visit :url)]
+          [:p "Visited At: " (get visit :time_visited)]]
+         )]))])))
+
+
