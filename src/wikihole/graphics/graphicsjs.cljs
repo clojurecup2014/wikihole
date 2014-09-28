@@ -13,12 +13,52 @@
                                  times))]
     (vec (map vector (butlast times) time-per-page))))
 
-(defn draw
+(defn make-time-data
+  []
+  (let
+    [data (.-visits (.parse js/JSON (.-innerHTML (.getElementById js/document "secret-data"))))
+     times (array)]
+    (doseq [visit data]
+      (.push times (.-time_visited visit)))
+    times))
+
+(defn remove-last
+  [arr]
+  (.splice arr -1 1)
+  arr)
+
+(defn make-per-page-data
+  []
+  (let
+    [data (.-visits (.parse js/JSON (.-innerHTML (.getElementById js/document "secret-data"))))
+     times (make-time-data)
+     times-on-page (array)]
+    (doseq [visit data]
+      (let [idx (.indexOf times (.-time_visited visit))]
+        (.push times-on-page (- (nth times (+ idx 1) (.-time_visited visit)) (.-time_visited visit)))))
+    (remove-last times-on-page)))
+
+(defn draw-times-per-page
   []
   (if
     js/Raphael
-    (let [paper (js/Raphael. "chart-container" 500 500)]
-      (. paper piechart 320 240 100 (array 320 240 100)))))
+    (let
+      [color1 "#219ae0" ;; blue
+       color2 "#b300bc" ;; magenta
+       color3 "#00bc8d" ;; green
+       label-text-opts (js-obj "font-weight" "bold" "font-size" "13px")
+       x-label "Time of Lookup"
+       y-label "Time Spent on Page"
+       xdata (remove-last (make-time-data))
+       ydata (make-per-page-data)
+       paper (js/Raphael. "chart-container" 500 500)]
+      (. paper linechart
+         60 10 800 330 xdata ydata
+         (js-obj "gutter" 20 "nostroke" false
+                 "axis" "0 0 0 1" "axisystep" 10
+                 "symbol" "circle" "smooth" true
+                 "width" 1.2
+                 "colors" (array color1 color2 color3))))))
 
 (defn init
   []
@@ -27,7 +67,6 @@
            (.getElementById js/document "secret-data")
            (.getElementById js/document "chart-container"))
    (do
-     (.log js/console (.-innerHTML (.getElementById js/document "secret-data")))
-     (draw))))
+     (draw-times-per-page))))
 
 (set! (.-onload js/window) init)

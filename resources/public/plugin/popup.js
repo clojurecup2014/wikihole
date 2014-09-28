@@ -27055,10 +27055,141 @@ wikihole.graphicsjs.time_with_per_page = function time_with_per_page(trip) {
   }(names, times), times));
   return cljs.core.vec.call(null, cljs.core.map.call(null, cljs.core.vector, cljs.core.butlast.call(null, times), time_per_page));
 };
-wikihole.graphicsjs.draw = function draw() {
+wikihole.graphicsjs.make_time_data = function make_time_data() {
+  var data = JSON.parse(document.getElementById("secret-data").innerHTML).visits;
+  var times = [];
+  var seq__12856_12860 = cljs.core.seq.call(null, data);
+  var chunk__12857_12861 = null;
+  var count__12858_12862 = 0;
+  var i__12859_12863 = 0;
+  while (true) {
+    if (i__12859_12863 < count__12858_12862) {
+      var visit_12864 = cljs.core._nth.call(null, chunk__12857_12861, i__12859_12863);
+      times.push(visit_12864.time_visited);
+      var G__12865 = seq__12856_12860;
+      var G__12866 = chunk__12857_12861;
+      var G__12867 = count__12858_12862;
+      var G__12868 = i__12859_12863 + 1;
+      seq__12856_12860 = G__12865;
+      chunk__12857_12861 = G__12866;
+      count__12858_12862 = G__12867;
+      i__12859_12863 = G__12868;
+      continue;
+    } else {
+      var temp__4126__auto___12869 = cljs.core.seq.call(null, seq__12856_12860);
+      if (temp__4126__auto___12869) {
+        var seq__12856_12870__$1 = temp__4126__auto___12869;
+        if (cljs.core.chunked_seq_QMARK_.call(null, seq__12856_12870__$1)) {
+          var c__4408__auto___12871 = cljs.core.chunk_first.call(null, seq__12856_12870__$1);
+          var G__12872 = cljs.core.chunk_rest.call(null, seq__12856_12870__$1);
+          var G__12873 = c__4408__auto___12871;
+          var G__12874 = cljs.core.count.call(null, c__4408__auto___12871);
+          var G__12875 = 0;
+          seq__12856_12860 = G__12872;
+          chunk__12857_12861 = G__12873;
+          count__12858_12862 = G__12874;
+          i__12859_12863 = G__12875;
+          continue;
+        } else {
+          var visit_12876 = cljs.core.first.call(null, seq__12856_12870__$1);
+          times.push(visit_12876.time_visited);
+          var G__12877 = cljs.core.next.call(null, seq__12856_12870__$1);
+          var G__12878 = null;
+          var G__12879 = 0;
+          var G__12880 = 0;
+          seq__12856_12860 = G__12877;
+          chunk__12857_12861 = G__12878;
+          count__12858_12862 = G__12879;
+          i__12859_12863 = G__12880;
+          continue;
+        }
+      } else {
+      }
+    }
+    break;
+  }
+  return times;
+};
+wikihole.graphicsjs.remove_last = function remove_last(arr) {
+  arr.splice(-1, 1);
+  return arr;
+};
+wikihole.graphicsjs.make_per_page_data = function make_per_page_data() {
+  var data = JSON.parse(document.getElementById("secret-data").innerHTML).visits;
+  var times = wikihole.graphicsjs.make_time_data.call(null);
+  var times_on_page = [];
+  var seq__12885_12889 = cljs.core.seq.call(null, data);
+  var chunk__12886_12890 = null;
+  var count__12887_12891 = 0;
+  var i__12888_12892 = 0;
+  while (true) {
+    if (i__12888_12892 < count__12887_12891) {
+      var visit_12893 = cljs.core._nth.call(null, chunk__12886_12890, i__12888_12892);
+      var idx_12894 = times.indexOf(visit_12893.time_visited);
+      times_on_page.push(cljs.core.nth.call(null, times, idx_12894 + 1, visit_12893.time_visited) - visit_12893.time_visited);
+      var G__12895 = seq__12885_12889;
+      var G__12896 = chunk__12886_12890;
+      var G__12897 = count__12887_12891;
+      var G__12898 = i__12888_12892 + 1;
+      seq__12885_12889 = G__12895;
+      chunk__12886_12890 = G__12896;
+      count__12887_12891 = G__12897;
+      i__12888_12892 = G__12898;
+      continue;
+    } else {
+      var temp__4126__auto___12899 = cljs.core.seq.call(null, seq__12885_12889);
+      if (temp__4126__auto___12899) {
+        var seq__12885_12900__$1 = temp__4126__auto___12899;
+        if (cljs.core.chunked_seq_QMARK_.call(null, seq__12885_12900__$1)) {
+          var c__4408__auto___12901 = cljs.core.chunk_first.call(null, seq__12885_12900__$1);
+          var G__12902 = cljs.core.chunk_rest.call(null, seq__12885_12900__$1);
+          var G__12903 = c__4408__auto___12901;
+          var G__12904 = cljs.core.count.call(null, c__4408__auto___12901);
+          var G__12905 = 0;
+          seq__12885_12889 = G__12902;
+          chunk__12886_12890 = G__12903;
+          count__12887_12891 = G__12904;
+          i__12888_12892 = G__12905;
+          continue;
+        } else {
+          var visit_12906 = cljs.core.first.call(null, seq__12885_12900__$1);
+          var idx_12907 = times.indexOf(visit_12906.time_visited);
+          times_on_page.push(cljs.core.nth.call(null, times, idx_12907 + 1, visit_12906.time_visited) - visit_12906.time_visited);
+          var G__12908 = cljs.core.next.call(null, seq__12885_12900__$1);
+          var G__12909 = null;
+          var G__12910 = 0;
+          var G__12911 = 0;
+          seq__12885_12889 = G__12908;
+          chunk__12886_12890 = G__12909;
+          count__12887_12891 = G__12910;
+          i__12888_12892 = G__12911;
+          continue;
+        }
+      } else {
+      }
+    }
+    break;
+  }
+  return wikihole.graphicsjs.remove_last.call(null, times_on_page);
+};
+wikihole.graphicsjs.draw_times_per_page = function draw_times_per_page() {
   if (cljs.core.truth_(Raphael)) {
+    var color1 = "#219ae0";
+    var color2 = "#b300bc";
+    var color3 = "#00bc8d";
+    var label_text_opts = function() {
+      var obj12917 = {"font-weight":"bold", "font-size":"13px"};
+      return obj12917;
+    }();
+    var x_label = "Time of Lookup";
+    var y_label = "Time Spent on Page";
+    var xdata = wikihole.graphicsjs.remove_last.call(null, wikihole.graphicsjs.make_time_data.call(null));
+    var ydata = wikihole.graphicsjs.make_per_page_data.call(null);
     var paper = new Raphael("chart-container", 500, 500);
-    return paper.piechart(320, 240, 100, [320, 240, 100]);
+    return paper.linechart(60, 10, 800, 330, xdata, ydata, function() {
+      var obj12919 = {"gutter":20, "nostroke":false, "axis":"0 0 0 1", "axisystep":10, "symbol":"circle", "smooth":true, "width":1.2, "colors":[color1, color2, color3]};
+      return obj12919;
+    }());
   } else {
     return null;
   }
@@ -27082,8 +27213,7 @@ wikihole.graphicsjs.init = function init() {
       return and__3627__auto__;
     }
   }())) {
-    console.log(document.getElementById("secret-data").innerHTML);
-    return wikihole.graphicsjs.draw.call(null);
+    return wikihole.graphicsjs.draw_times_per_page.call(null);
   } else {
     return null;
   }
