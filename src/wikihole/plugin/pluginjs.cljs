@@ -64,7 +64,10 @@
         (.setRequestHeader http "Content-Type" "application/json")
         (aset http "onreadystatechange" (fn []
                                            (if (== (.-readyState http) 4)
+                                                (do
                                               (println (aget (.parse js/JSON (.-responseText http)) "trip_id"))
+                                                (.create (.-windows js/chrome) (js-obj "url" (str "http://wikihole.clojurecup.com/trip/" (aget (.parse js/JSON (.-responseText http)) "trip_id"))))
+                                              )
                                                 )))
         (.send http (.stringify js/JSON (clj->js {:trip parsed-visits})))))
 
@@ -90,15 +93,6 @@
 (defn break-into-trips
     [visits]
     (first (reduce reduce-over-visits [() 0] (reverse visits))))
-
- ;   (.push visits (js-obj "time_visited" (.floor js/Math (/ (.-lastVisitTime itm) 1000)) "url" (.-url itm)))
-(defn send-visits [visits]
- ; (doseq [vs visits]
- ;  (println visits)
-  (let [http (js/XMLHttpRequest.)]
-    (.open http "POST" "http://wikihole.clojurecup.com/user/1/trip" true)
-    (.setRequestHeader http "Content-Type" "application/json")
-    (.send http (.stringify js/JSON (js-obj "trip" visits)))))
 
 (defn collect-data
   []
